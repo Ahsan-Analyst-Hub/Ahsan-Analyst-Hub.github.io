@@ -1,166 +1,469 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahsan Analyst Hub | Unlock Data For Your Business</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0b132b',
-                        cardGlass: 'rgba(15, 23, 42, 0.65)',
-                        borderGlass: 'rgba(255, 255, 255, 0.1)',
-                    }
-                }
-            }
-        }
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahsan | Data Analyst Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            background-color: #060b19;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(29, 78, 216, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(14, 116, 144, 0.2) 0%, transparent 40%);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow-x: hidden;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
-        .glass-panel {
-            background: rgba(13, 22, 41, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+        html{
+            scroll-behavior:smooth;
         }
-        .glow-sphere {
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.15) 0%, rgba(10, 25, 60, 0) 70%);
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#0b0b0f;
+            color:#ffffff;
+            line-height:1.7;
         }
+
+        a{
+            text-decoration:none;
+        }
+
+        img{
+            width:100%;
+            height:auto;
+            display:block;
+            border-radius:14px;
+            object-fit:cover;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+        }
+
+        /* ================= HEADER ================= */
+
+        header{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:60px 20px;
+            background:
+            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+            url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop') center/cover;
+        }
+
+        .hero{
+            max-width:900px;
+        }
+
+        .hero h1{
+            font-size:4rem;
+            margin-bottom:20px;
+            font-weight:700;
+            background:linear-gradient(to right,#00d4ff,#ffffff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .hero p{
+            font-size:1.1rem;
+            color:#d6d6d6;
+            margin-bottom:35px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .btn-group{
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:15px;
+        }
+
+        .btn{
+            padding:14px 28px;
+            border-radius:50px;
+            font-weight:600;
+            transition:0.3s ease;
+            border:2px solid #00d4ff;
+        }
+
+        .btn-primary{
+            background:#00d4ff;
+            color:#000;
+        }
+
+        .btn-primary:hover{
+            background:#fff;
+            border-color:#fff;
+            transform:translateY(-3px);
+        }
+
+        .btn-outline{
+            color:#fff;
+        }
+
+        .btn-outline:hover{
+            background:#00d4ff;
+            color:#000;
+            transform:translateY(-3px);
+        }
+
+        /* ================= SECTION ================= */
+
+        section{
+            padding:90px 0;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:60px;
+        }
+
+        .section-title h2{
+            font-size:2.5rem;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#bcbcbc;
+        }
+
+        /* ================= PROJECT GRID ================= */
+
+        .projects-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:30px;
+        }
+
+        .project-card{
+            background:#15151d;
+            border-radius:20px;
+            overflow:hidden;
+            transition:0.4s ease;
+            border:1px solid rgba(255,255,255,0.08);
+            box-shadow:0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .project-card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,212,255,0.15);
+        }
+
+        .project-content{
+            padding:25px;
+        }
+
+        .project-content h3{
+            margin-bottom:15px;
+            font-size:1.4rem;
+            color:#00d4ff;
+        }
+
+        .project-content p{
+            color:#d0d0d0;
+            font-size:0.95rem;
+            margin-bottom:20px;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skills{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:15px;
+            margin-top:30px;
+        }
+
+        .skill{
+            background:#171720;
+            padding:12px 22px;
+            border-radius:50px;
+            border:1px solid rgba(255,255,255,0.08);
+            font-size:0.95rem;
+            transition:0.3s;
+        }
+
+        .skill:hover{
+            background:#00d4ff;
+            color:#000;
+            transform:scale(1.05);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer{
+            text-align:center;
+            padding:35px 20px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            background:#090909;
+            color:#9e9e9e;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:768px){
+
+            header{
+                min-height:auto;
+                padding:100px 20px;
+            }
+
+            .hero h1{
+                font-size:2.5rem;
+            }
+
+            .hero p{
+                font-size:1rem;
+            }
+
+            .section-title h2{
+                font-size:2rem;
+            }
+
+            .project-content{
+                padding:20px;
+            }
+
+        }
+
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navbar -->
-    <header class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between z-50 relative">
-        <!-- Logo -->
-        <div class="flex items-center space-x-3 glass-panel px-4 py-2 rounded-full">
-            <div class="w-6 h-6 bg-cyan-400 rounded-md flex items-center justify-center shadow-lg shadow-cyan-500/50">
-                <svg class="w-4 h-4 text-slate-950 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+<body>
+
+    <!-- HERO SECTION -->
+
+    <header>
+        <div class="hero">
+            <h1>Ahsan Ul Haq</h1>
+
+            <p>
+                Data tells you what happened. Diverse industry experience tells you why—and combining the two is where I believe the real value lies.
+                Business-focused Data Analyst with 13+ years of retail leadership experience, combining commercial expertise with data analytics and Business Intelligence to transform operational, customer and sales data into actionable insights.            </p>
+
+            <div class="btn-group">
+                <a href="https://linkedin.com/in/ahsan-ul-haq-18725514" class="btn btn-primary" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Ahsan-Analyst-Hub" class="btn btn-outline" target="_blank">GitHub</a>
             </div>
-            <span class="font-semibold text-lg tracking-wide text-white">AhsanAnalyst</span>
-        </div>
 
-        <!-- Navigation Links -->
-        <nav class="hidden md:flex items-center space-x-8 glass-panel px-8 py-2.5 rounded-full text-sm font-medium text-slate-300">
-            <a href="#" class="text-white hover:text-cyan-400 transition">Home</a>
-            <a href="#" class="hover:text-cyan-400 transition">About</a>
-            <a href="#" class="hover:text-cyan-400 transition">Pricing</a>
-            <a href="#" class="hover:text-cyan-400 transition flex items-center gap-1">Services <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></a>
-            <a href="#" class="hover:text-cyan-400 transition">Solution</a>
-        </nav>
-
-        <!-- Right Actions -->
-        <div class="flex items-center space-x-4">
-            <button class="hidden sm:flex items-center space-x-1 text-sm text-slate-300 hover:text-white px-3 py-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-                <span>En</span>
-            </button>
-            <a href="#" class="bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-semibold px-5 py-2.5 rounded-full text-sm shadow-lg shadow-teal-500/20 transition">
-                Get in Touch
-            </a>
+            <div class="skills">
+                <div class="skill">SQL</div>
+                <div class="skill">Power BI</div>
+                <div class="skill">Excel</div>
+                <div class="skill">Data Analysis</div>
+                <div class="skill">Data Visualisation</div>
+                <div class="skill">Business Intelligence</div>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="relative max-w-7xl mx-auto px-6 pt-12 pb-24 text-center z-10 flex-grow flex flex-col items-center justify-center">
-        
-        <!-- Background Glowing Orb Layer -->
-        <div class="absolute inset-0 glow-sphere rounded-full filter blur-3xl -z-10 pointer-events-none max-w-4xl mx-auto h-[500px] my-auto"></div>
+    <!-- PROJECTS -->
 
-        <!-- Pill Badge -->
-        <div class="inline-flex items-center space-x-2 glass-panel px-4 py-1.5 rounded-full text-xs text-cyan-300 mb-8 border border-cyan-500/30">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            <span>Turning Data Into Strategy</span>
-        </div>
+    <section>
+        <div class="container">
 
-        <!-- Main Heading -->
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-tight mb-6">
-            Turn Every Customer Interaction into Business Intelligence
-        </h1>
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p>Data Analysis • Business Intelligence • SQL • Power BI • DAX • EDA </p>
+            </div>
 
-        <!-- Subtitle -->
-        <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10">
-            We provide advanced analytics tools to simplify data, identify trends, and provide your business with actionable insights.
-        </p>
+            <div class="projects-grid">
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mb-20">
-            <a href="#" class="w-full sm:w-auto bg-white text-slate-950 font-semibold px-8 py-3.5 rounded-full hover:bg-slate-200 transition flex items-center justify-center space-x-2 shadow-xl">
-                <span>Get Started</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-            <a href="#" class="w-full sm:w-auto glass-panel text-white font-medium px-8 py-3.5 rounded-full hover:bg-slate-800/60 transition border border-slate-700">
-                Discover More
-            </a>
-        </div>
+                <!-- Project 0 -->
 
-        <!-- Floating Cards Showcase Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mt-6 items-end">
-            
-            <!-- Left Side Card (Preview Analytics UI) -->
-            <div class="glass-panel p-6 rounded-3xl text-left hidden md:block transform -rotate-3 hover:rotate-0 transition duration-300">
-                <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">System Insights</div>
-                <div class="relative h-36 flex items-center justify-center bg-slate-900/50 rounded-2xl border border-white/5">
-                    <div class="w-20 h-20 rounded-full border border-cyan-500/30 flex items-center justify-center relative">
-                        <div class="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center text-cyan-400">📊</div>
+                <div class="project-card">
+                    <img src="https://github.com/user-attachments/assets/9dba07b1-793c-4880-b2f3-62f05475479b" alt="Fly-Tipping Intelligence Enforcement Analytics">
+                    <div class="project-content">
+                        
+                        <h3>Fly-Tipping Intelligence Enforcement Analytics </h3>
+
+                        <p>
+                           This project is a synthetic Business Intelligence case study designed to answer fly-tipping issues and enforcement across Kent Council. The project demonstrates how raw incident data can be transformed into actionable intelligence through data cleaning, transformation, SQL analysis, Power BI data modelling, DAX and interactive visualisation.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Fly-Tipping-Intelligence-Enforcement-Analytics.git" class="btn btn-primary" target="_blank">
+                            View Project
+                        </a>
                     </div>
                 </div>
-                <p class="text-xs text-slate-400 mt-4">Advanced analytics meets actionable insights to elevate decision making.</p>
-            </div>
 
-            <!-- Center Main Metric Card -->
-            <div class="glass-panel p-8 rounded-3xl text-left border border-cyan-500/20 shadow-2xl relative z-20">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-black text-white tracking-tight">64.5%</div>
-                        <div class="text-xs text-cyan-400 font-medium tracking-wide mt-1">Businesses &nbsp;|&nbsp; Globally</div>
+                 <!-- Project 9 -->
+                <div class="project-card">
+                    <img width="1376" height="768" alt="Image" src="https://github.com/user-attachments/assets/c9e64919-4ca4-44a2-801e-66c7b357b0b9" />
+                    <div class="project-content">
+                        <h3>Customer Experience BI & Feedback Integrity Platform (Chaiiwala) </h3>
+
+                        <p>
+                            This project demonstrates how Business Intelligence can transform operational data into actionable insights that improve customer satisfaction, 
+                            protect brand reputation and support continuous business improvement. At the same time, it highlights the importance of maintaining 
+                            data quality and integrity to ensure that management decisions are based on accurate and trustworthy information.     
+                        </p>
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Chaiiwala---Business-Intelligence-Analysis-case-study-.git" class="btn btn-primary">View Project</a>
                     </div>
-                    <span class="glass-panel px-3 py-1 rounded-lg text-xs text-slate-300 flex items-center gap-1">Yearly <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
                 </div>
-                <p class="text-xs text-slate-400 mb-6 leading-relaxed">
-                    Advanced data analytics meets actionable insights to elevate your decision-making.
-                </p>
-                <!-- Mini Chart Line Mockup -->
-                <div class="h-16 w-full relative flex items-end">
-                    <svg class="w-full h-full overflow-visible" viewBox="0 0 200 50" fill="none">
-                        <path d="M0 45 Q 40 30, 80 25 T 160 15 T 200 5" stroke="#22d3ee" stroke-width="2.5" fill="none"/>
-                        <circle cx="160" cy="15" r="4" fill="#22d3ee" class="animate-ping"/>
-                        <circle cx="160" cy="15" r="3" fill="#ffffff"/>
-                    </svg>
-                </div>
-                <div class="mt-4 pt-4 border-t border-white/5 flex justify-between items-center text-xs text-cyan-400 font-medium">
-                    <span>Statistics</span>
-                    <span>→</span>
-                </div>
-            </div>
 
-            <!-- Right Side Card (Security & Protection) -->
-            <div class="glass-panel p-6 rounded-3xl text-left hidden md:block transform rotate-3 hover:rotate-0 transition duration-300">
-                <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">Enterprise Security</div>
-                <h3 class="text-lg font-bold text-white mb-2">Your Data Security is Our Top Priority</h3>
-                <p class="text-xs text-slate-400 mb-6">We understand that data security is essential. We employ enterprise-grade protection protocols.</p>
-                <div class="flex gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">🔒</div>
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">☁️</div>
-                </div>
-            </div>
+                 <!-- Project 7 -->
 
+                <div class="project-card">
+                    <img width="1376" height="768" alt="Image" src="https://github.com/user-attachments/assets/90d746d6-1fa6-4d0b-9008-ab6071fe86fc" alt" Spark BI - Project" />
+                    <div class="project-content">
+                        <h3>Spark BI - Inventory & Product Performance Analysis </h3>
+
+                        <p>
+                        This project analyzes inventory performance, product demand, revenue generation, returns, exchanges, and stock write-offs using SQL, 
+                        Power BI, and Excel. The objective was to transform raw inventory and product data into actionable business insights that support inventory 
+                            planning, product management, stock replenishment, and profitability improvement.
+                            
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Inventory-Product-Performance-Analysis-SQL-Power-BI-Excel.git" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+                <!-- Project 1 -->
+
+                <div class="project-card">
+                    <img src="https://github.com/user-attachments/assets/efba67a6-b7cd-4a60-a482-77316849867b" alt="Retail Stock Management">
+
+                    <div class="project-content">
+                        <h3>Retail Stock Management</h3>
+
+                        <p>
+                            End-to-end retail analytics solution using SQL Server and
+                            Power BI for stock tracking, reporting, and operational insights.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Retail-Stock-Management-" class="btn btn-primary" target="_blank">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+
+                <div class="project-card">
+                    <img src="https://github.com/user-attachments/assets/a2e8a1dd-c826-4de3-8c7f-565f23b4287c" alt="Nespresso Project">
+
+                    <div class="project-content">
+                        <h3>Nespresso Coffee Shop Expension Project</h3>
+
+                        <p>
+                            SQL-driven market expansion analysis identifying the best UK
+                            cities for future Nespresso store growth opportunities.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Nespresso-Coffee-Shop-Project" class="btn btn-primary" target="_blank">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+
+                <div class="project-card">
+                    <img src="https://github.com/user-attachments/assets/5ff43968-e361-4f44-813d-2634a7fd5c0b" alt="Banking Dashboard">
+
+                    <div class="project-content">
+                        <h3>Banking Dashboard & Analytics</h3>
+
+                        <p>
+                            Complete banking analytics workflow combining SQL data
+                            preparation with Power BI interactive dashboards and KPIs.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Synthetic-Banking-Dataset-Analysis-Power-BI-Dashboard.git" class="btn btn-primary" target="_blank">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+
+                <div class="project-card">
+                   <img width="1408" height="768" alt="Image" src="https://github.com/user-attachments/assets/5777ecca-3550-4a76-b6c7-ef8d20a83644" />
+                        <div class="project-content">
+                        <h3>Sales & Revenue Analysis Using SQL</h3>
+
+                        <p>
+                            This project demonstrates how SQL and data analysis can transform raw business data into actionable insights.
+                            By analyzing customer behavior, product performance, and sales trends, businesses can make smarter decisions that 
+                            directly improve profitability and long-term success.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Sales-and-Revenue-Analysis-using-SQL.git" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+
+                <div class="project-card">
+                    <img width="1408" height="768" alt="Image" src="https://github.com/user-attachments/assets/1e0a0b9d-d893-4a6e-afd0-b0e508f4b500" />
+                    <div class="project-content">
+                        <h3>Sales & Revenue Analysis using PowerBI (DAX) </h3>
+
+                        <p>
+                            This project is to demonstrate how relational sales data can be transformed into meaningful business intelligence using Power BI and DAX measures.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Sales-and-Revenue-Analysis-using-PowerBI.git" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+
+
+                <!-- Project 6 -->
+
+                <div class="project-card">
+                    <img width="1375" height="784" alt="Image" src="https://github.com/user-attachments/assets/306f313c-a16e-429e-b112-47cb0c7ccecc" />
+                    <div class="project-content">
+                        <h3>Retail sales & Holiday Impact Analysis </h3>
+
+                        <p>
+                            This project analyzes historical retail sales data from 45 stores across multiple departments to identify the
+                            drivers of sales performance, evaluate the impact of promotional markdowns, and understand holiday sales behavior.
+
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Retail-Sales-Holiday-Impact-Analysis.git" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+
+               
+                <!-- Project 8 -->
+
+                <div class="project-card">
+                    <img width="1376" height="768" alt="Image" src="https://github.com/user-attachments/assets/8e109456-7150-4040-90e9-c969f94778fd" />
+
+                    <div class="project-content">
+                        <h3>Departmental Store P&L Data Analysis</h3>
+
+                        <p>
+                            The Departmental Store P&L Data Analysis is a Power BI business intelligence project designed to transform raw transactional data into actionable insights. The project focuses on analyzing sales performance, profitability, customer behavior, product performance, promotional effectiveness, and regional sales trends across multiple product categories.
+                        </p>
+
+                        <a href="https://github.com/Ahsan-Analyst-Hub/Departmental-Store-P-L-Data-Analysis.git" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+               
+
+
+            </div>
         </div>
+    </section>
 
-    </main>
+    <!-- FOOTER -->
+
+    <footer>
+        <p>© 2026 Ahsan Ul Haq | Data Analyst Portfolio</p>
+    </footer>
 
 </body>
 </html>
