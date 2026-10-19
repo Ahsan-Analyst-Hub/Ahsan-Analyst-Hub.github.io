@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'Message:\\n' + data.get('message')
     );
     // Replace the placeholder address below with your preferred business email before publishing.
-    window.location.href = 'mailto:YOUR-EMAIL@example.com?subject=' + subject + '&body=' + body;
+    window.location.href = 'mailto:ahsan.business.intelligence@gmail.com?subject=' + subject + '&body=' + body;
     document.querySelector('.form-status').textContent = 'Your email app should open with the enquiry prepared. Add your real email address in script.js before publishing.';
   });
 });
