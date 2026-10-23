@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Retail analytics articles exploring sales, availability, stock, store performance, UK grocery market share and retail opportunities.">
+  <title>Retail Analytics | Business Intelligence Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .article-hero{padding:76px 0 58px;background:linear-gradient(135deg,#f0f6f1,#fbfcfa 70%);border-bottom:1px solid var(--line)}
+    .article-hero h1{font:600 clamp(38px,5vw,62px)/1.12 Manrope,sans-serif;letter-spacing:-.055em;max-width:900px;margin:18px 0}
+    .article-hero .lead{font-size:17px;line-height:1.85;color:#62736c;max-width:800px;margin:0}
+    .article-meta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6d8c7d;font-weight:700;margin-top:25px}
+    .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:60px;padding-top:58px;padding-bottom:85px;align-items:start}
+    .article-content{min-width:0;max-width:850px}.article-content h2{font:600 clamp(26px,3vw,36px)/1.2 Manrope,sans-serif;letter-spacing:-.04em;margin:48px 0 18px}.article-content h3{font:700 20px/1.35 Manrope,sans-serif;margin:30px 0 12px}.article-content p,.article-content li{font-size:14px;line-height:1.9;color:#52645c}.article-content p{margin:0 0 18px}.article-content ul{padding-left:22px;margin:12px 0 24px}.article-content li{margin:7px 0}.article-content strong{color:#243b32}.article-content a{color:#2e7969;text-decoration:underline;text-underline-offset:3px}
+    .article-content table{width:100%;border-collapse:collapse;margin:20px 0 28px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12px}.article-content th,.article-content td{text-align:left;padding:12px 13px;border-bottom:1px solid #e8eee9;vertical-align:top}.article-content th{background:#edf5f0;color:#315f51;font-size:10px;letter-spacing:.05em;text-transform:uppercase}.article-content td{color:#52645c;line-height:1.65}.article-content tr:last-child td{border-bottom:0}.article-content .callout{background:#f0f6f1;border-left:3px solid var(--teal);padding:20px 23px;margin:25px 0;border-radius:0 10px 10px 0}.article-content .callout p{margin:0}.article-sidebar{position:sticky;top:115px;background:#f3f7f3;border:1px solid #e0e9e1;border-radius:14px;padding:22px}.article-sidebar h3{font:700 13px Manrope,sans-serif;margin:0 0 12px}.article-sidebar a{display:block;font-size:11px;color:#59766b;padding:8px 0;border-bottom:1px solid #e0e9e1}.article-sidebar a:last-child{border-bottom:0}.article-divider{height:1px;background:var(--line);margin:62px 0}.source-list{font-size:12px;color:#607168;padding-left:20px}.source-list li{font-size:12px;overflow-wrap:anywhere}.article-footer{background:#f0f4f0;border-top:1px solid #e0e8e1;padding:24px 0;color:#75837b;font-size:10px}
+    @media(max-width:850px){.article-layout{grid-template-columns:1fr;gap:30px}.article-sidebar{position:static;order:-1}.article-sidebar nav{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.article-hero{padding:52px 0 42px}}
+    @media(max-width:560px){.article-content table{font-size:11px}.article-content th,.article-content td{padding:9px 8px}.article-sidebar nav{grid-template-columns:1fr}.article-hero .lead{font-size:15px}}
+  </style>
+</head>
+<body>
+  <div class="announcement"><span class="announcement-dot"></span> BUSINESS INTELLIGENCE STUDIO · RETAIL ANALYTICS</div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Business Intelligence Studio home">
+      <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+      <span class="brand-copy"><strong>BUSINESS INTELLIGENCE</strong><small>DATA · INSIGHT · ACTION</small></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-group"><button class="nav-trigger" aria-expanded="false">Products <span class="chevron">⌄</span></button><div class="dropdown"><a href="index.html#retail"><strong>Retail Analytics</strong><small>Sales, stock and store performance</small></a><a href="index.html#feedback"><strong>Customer Feedback Intelligence</strong><small>Turn feedback into practical insight</small></a><a href="index.html#projects"><strong>POS Analysis</strong><small>Understand transactions and trends</small></a></div></div>
+      <div class="nav-group"><button class="nav-trigger" aria-expanded="false">Resources <span class="chevron">⌄</span></button><div class="dropdown"><a href="#article-retail"><strong>Retail Analytics Article</strong><small>Operational practices and KPIs</small></a><a href="#article-market"><strong>UK Grocery Market</strong><small>Market scale and opportunities</small></a></div></div>
+      <a class="nav-cta" href="index.html#contact">Get in touch <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="section-wrap">
+        <div class="eyebrow"><span class="eyebrow-line"></span> RETAIL INSIGHT · TWO-PART FEATURE</div>
+        <h1>Retail Analytics: From Store Performance to Market Opportunity</h1>
+        <p class="lead">Explore how leading UK grocers use data to understand sales, availability, stock and operational KPIs — and what the scale of the grocery market means for better business decisions.</p>
+        <div class="article-meta">Retail analytics · UK grocery · Business intelligence</div>
+      </div>
+    </section>
+
+    <section class="section-wrap article-layout">
+      <article class="article-content">
+        <section id="article-retail">
+          <div class="eyebrow"><span class="eyebrow-line"></span> ARTICLE 01</div>
+          <h2>Retail Analytics: Turning Sales, Stock and Store Performance into Practical Business Improvement</h2>
+          <p><em>How leading UK retailers use data to improve availability, understand customer demand, manage stock and make better operational decisions.</em></p>
+          <p>Retail is a business of thousands of decisions made every day. Which products should a store order? Why is one branch selling more than another? Are promotional offers increasing sales or simply reducing margins? Why does a product appear in the inventory system but remain unavailable to customers on the shelf?</p>
+          <p>For retailers such as Tesco, Sainsbury’s, Asda and Lidl, as well as premium food businesses such as Waitrose and Marks & Spencer (M&S), these questions have significant commercial consequences. Retail analytics helps turn sales transactions, inventory records, customer behaviour and operational data into answers that managers can act upon.</p>
+          <div class="callout"><p><strong>The underlying principle:</strong> understanding what happened is valuable, but understanding why it happened and what to do next is where retail analytics creates real business value.</p></div>
+
+          <h2 id="retailer-practices">1. How leading UK retailers approach analytics</h2>
+          <p>Although these retailers operate different business models, their published strategies and technology initiatives reveal a common focus: better forecasting, product availability, stock management, waste reduction and operational efficiency.</p>
+          <h3>Tesco: Connecting availability, sales and operational efficiency</h3>
+          <p>Tesco’s approach demonstrates how retail analytics extends beyond sales reporting into the wider supply chain. Its published business priorities include reviewing the movement of stock from suppliers through distribution centres and into stores, with the aim of improving availability and reducing waste. Tesco has also invested in more efficient fresh-food replenishment processes and distribution technology.</p>
+          <p>Its customer and sales data also supports a broader commercial strategy. Clubcard information, online shopping behaviour and customer preferences help Tesco develop more personalised offers and shopping experiences.</p>
+          <ul><li><strong>Sales performance:</strong> Which products, categories and stores are driving growth, and which are falling behind?</li><li><strong>Availability:</strong> Are high-demand products experiencing repeated stockouts?</li><li><strong>Waste and stock loss:</strong> Are stores ordering too much of products with short shelf lives?</li><li><strong>Operational efficiency:</strong> Are changes in replenishment processes improving performance?</li></ul>
+          <p>Tesco’s 2025 annual report highlights its end-to-end stock-flow review, improved fresh-food replenishment and investments to reduce stock loss.</p>
+          <h3>Sainsbury’s: Using data to improve replenishment and reduce waste</h3>
+          <p>Sainsbury’s provides a useful example of connecting store-level data with operational decisions. In its 2026 half-year reporting, the business described data-led stock replenishment capabilities designed to help stores identify available inventory and move it onto the shop floor more efficiently. It also reported the use of an optimised price-reduction algorithm across its stores to reduce waste and improve colleague efficiency.</p>
+          <p>A store might have 20 units of a product recorded in its inventory. However, if those units are sitting in the backroom rather than on the shelf, the product is effectively unavailable to a customer at that moment.</p>
+          <ul><li>Products with frequent gaps between recorded stock and shelf availability.</li><li>Stores where replenishment delays are affecting sales.</li><li>Products approaching expiry that require earlier markdowns.</li><li>Whether improved stock movement is reducing waste without creating unnecessary labour.</li></ul>
+          <h3>Asda: Making availability and customer demand measurable</h3>
+          <p>Asda’s published technology strategy places data analytics at the centre of its retail transformation, covering range, pricing, promotions, loyalty and supply chain. In its first-quarter 2025 trading update, Asda reported that product availability had improved from 90% to 95% since January, alongside improvements in customer satisfaction.</p>
+          <p>Asda has also been reported to be trialling AI-powered shelf cameras that scan for out-of-stock products, low stock, shelf-condition issues and planogram non-compliance.</p>
+          <p>The critical question is not simply whether availability improved, but whether the improvement translated into a better customer experience and stronger commercial results.</p>
+          <h3>Lidl: Forecasting demand while protecting availability and freshness</h3>
+          <p>Lidl operates a different model from the traditional full-range supermarket. Its relatively focused product range, frequent promotional activity and emphasis on competitive pricing make stock planning particularly important.</p>
+          <p>Seasonal campaigns and limited-time offers add complexity. Demand for promotional products can rise sharply over a short period, meaning that a forecast based only on ordinary historical sales may not be sufficient.</p>
+          <ul><li>Promotional sales against forecast demand.</li><li>Stock availability before, during and after a campaign.</li><li>The relationship between delivery quantities and actual sales.</li><li>Differences in demand between stores and regions.</li><li>Whether excess stock remains after a promotion finishes.</li></ul>
+          <h3>Waitrose: Demand forecasting and real-time stock visibility</h3>
+          <p>Waitrose has invested in technology designed to improve forecasting and product availability. Its demand-forecasting approach considers customer behaviour and factors such as weather, promotions and major events, rather than relying solely on historical sales. Inventory-management technology can also give store colleagues a more current view of stock throughout the trading day, supporting replenishment and stock-management decisions.</p>
+          <p>Forecasting and inventory accuracy need to work together. A forecast may be accurate, but if inventory records are unreliable, replenishment decisions can still be poor.</p>
+          <h3>M&S: Balancing availability, quality and waste</h3>
+          <p>M&S Food offers another example of analytics applied to a quality-led retail business. Forecasting and ordering technology can help match supply with variable customer demand, particularly in fresh and chilled food, where excessive stock can lead to waste, but insufficient stock can damage customer confidence and sales.</p>
+          <p>The commercial objective is not to maximise stock or minimise stock indiscriminately. It is to maintain the right balance between availability, freshness, customer satisfaction and profitability.</p>
+
+          <h2 id="analyst-meaning">2. What these practices mean for a BI or Data Analyst</h2>
+          <p>Retail analytics is not simply the production of dashboards showing sales figures. The most useful analysis connects several dimensions of business performance.</p>
+          <table><thead><tr><th>Analytical area</th><th>Questions to investigate</th><th>Potential improvement</th></tr></thead><tbody>
+          <tr><td>Sales performance</td><td>Which stores, products and categories are growing or declining?</td><td>Identify growth opportunities and underperforming ranges.</td></tr>
+          <tr><td>Availability</td><td>Which products are repeatedly unavailable, and when?</td><td>Reduce lost sales and improve customer experience.</td></tr>
+          <tr><td>Stock management</td><td>Is stock held in the right quantity and location?</td><td>Improve replenishment and inventory accuracy.</td></tr>
+          <tr><td>Forecasting</td><td>How closely do actual sales match expected demand?</td><td>Improve ordering and stock allocation.</td></tr>
+          <tr><td>Promotions</td><td>Did a promotion generate incremental sales or simply discount existing demand?</td><td>Improve promotional effectiveness and margins.</td></tr>
+          <tr><td>Waste</td><td>Which products and stores have the highest waste rates?</td><td>Reduce markdowns and disposal costs.</td></tr>
+          <tr><td>Store operations</td><td>Are labour, delivery and replenishment processes affecting performance?</td><td>Improve productivity and consistency.</td></tr>
+          </tbody></table>
+          <p>A good retail analyst does not treat each KPI in isolation. A store reporting strong sales growth may also be experiencing high waste and falling availability. Sales growth alone would suggest success, but the wider performance picture could reveal that demand is not being managed efficiently.</p>
+
+          <h2 id="practical-example">3. A practical example: Finding the cause of lost sales</h2>
+          <p>Consider a hypothetical supermarket group with 50 stores. Management reports that sales of fresh bakery products are declining despite stable customer traffic. A retail analyst could investigate using sales, inventory and store-operation data.</p>
+          <ol><li><strong>Identify the pattern:</strong> compare sales volumes by store, product, weekday and time of day. Find where the decline is concentrated.</li><li><strong>Investigate availability:</strong> compare stock records with delivery schedules, shelf availability and sales during peak periods.</li><li><strong>Find the root cause:</strong> analysis shows several stores regularly run out of popular bakery products before the evening peak.</li><li><strong>Recommend an action:</strong> pilot revised replenishment schedules in affected stores and compare results against similar stores that have not changed their routines.</li></ol>
+          <p>The final stage is critical. The analyst should measure whether the intervention improves sales, availability and waste, rather than assuming that the recommendation has worked. This example is illustrative, not a reported result from any of the named retailers.</p>
+
+          <h2 id="retail-kpis">4. The KPIs that matter</h2>
+          <table><thead><tr><th>KPI</th><th>What it tells the business</th></tr></thead><tbody>
+          <tr><td>Sales value (£)</td><td>Revenue generated by a store or product.</td></tr><tr><td>Units sold</td><td>Volume of products purchased.</td></tr><tr><td>Like-for-like sales growth</td><td>Sales growth for comparable stores over a defined period.</td></tr><tr><td>Availability (%)</td><td>Proportion of relevant products available, according to the retailer’s measurement method.</td></tr><tr><td>Stockout rate (%)</td><td>How frequently products are unavailable.</td></tr><tr><td>Forecast accuracy</td><td>How closely forecast demand matches actual demand.</td></tr><tr><td>Waste value (£)</td><td>Financial value of products wasted or written off.</td></tr><tr><td>Stock turnover</td><td>How efficiently inventory is converted into sales.</td></tr><tr><td>Gross margin (%)</td><td>Revenue remaining after the cost of goods sold.</td></tr>
+          </tbody></table>
+          <p>These measures need consistent definitions and reliable underlying data. Availability based on recorded inventory may not reflect actual shelf availability if stock records contain errors. A reduction in waste is not necessarily a success if it has been achieved by under-ordering products and creating substantial lost sales.</p>
+          <div class="callout"><p><strong>Retail analytics is ultimately about making sure the right products are available in the right stores, at the right time, in the right quantities</strong> — while protecting sales, customer satisfaction and profitability.</p></div>
+          <p>The opportunity for a BI or Data Analyst is to find underperforming stores and products, identify whether availability, forecasting or operational processes contribute to the problem, quantify the impact, recommend an improvement and measure the result.</p>
+        </section>
+
+        <div class="article-divider"></div>
+
+        <section id="article-market">
+          <div class="eyebrow"><span class="eyebrow-line"></span> ARTICLE 02</div>
+          <h2>UK Grocery Retail: Market Share, Economic Contribution and Opportunities for Growth</h2>
+          <p><em>An overview of the scale of Britain’s leading supermarkets, household spending and how the UK grocery model compares with Ireland.</em></p>
+          <p>The UK grocery market is one of Europe’s largest and most competitive retail markets. Tesco, Sainsbury’s, Asda and Lidl collectively account for a substantial proportion of grocery sales, while premium retailers such as Waitrose and Marks & Spencer (M&S) compete through quality, convenience, customer loyalty and differentiated product ranges.</p>
+          <p>The sector is commercially important not only because of the amount consumers spend in supermarkets, but also because of its role in employment, food distribution, British agriculture and the wider supply chain.</p>
+
+          <h2 id="market-share">1. UK grocery market share</h2>
+          <p>According to Worldpanel by Numerator figures published by Defra, the UK grocery market shares for the 12 weeks ending 17 May 2026 were:</p>
+          <table><thead><tr><th>Retailer</th><th>Grocery market share</th></tr></thead><tbody><tr><td>Tesco</td><td>28.2%</td></tr><tr><td>Sainsbury’s</td><td>15.2%</td></tr><tr><td>Asda</td><td>11.5%</td></tr><tr><td>Lidl</td><td>8.6%</td></tr><tr><td><strong>Combined total</strong></td><td><strong>63.5%</strong></td></tr><tr><td>Waitrose</td><td>4.5%</td></tr></tbody></table>
+          <p>These figures demonstrate the scale of the four selected retailers. Tesco alone accounts for more than one-quarter of the measured grocery market, while Sainsbury’s and Asda maintain substantial positions.</p>
+          <p>Lidl is particularly interesting because its growth has challenged the traditional supermarket hierarchy. By May 2026, Lidl had become Britain’s fifth-largest supermarket, overtaking Morrisons in market share.</p>
+          <p><strong>Note:</strong> These market-share figures measure grocery sales, not the percentage of all UK household spending captured by these companies. M&S is not included because its clothing and general merchandise sales make it unsuitable for the standard grocery till-roll market-share measure.</p>
+
+          <h2 id="turnover-profit">2. Annual turnover, profits and retail outlet scale</h2>
+          <p>The table gives an indicative picture of the scale of the selected retailers. Figures are drawn from company reporting and other published sources, but their financial years and definitions differ. Turnover is not always UK grocery-only revenue, and operating profit is not the same as profit after tax.</p>
+          <table><thead><tr><th>Retailer</th><th>Annual turnover / sales</th><th>Profit measure</th><th>Approx. outlet scale</th></tr></thead><tbody>
+          <tr><td>Tesco</td><td>£69.9bn revenue, FY2024/25</td><td>£2.2bn profit before tax</td><td>Around 4,000 UK stores</td></tr>
+          <tr><td>Sainsbury’s</td><td>£30.0bn retail sales, FY2025/26, excluding fuel and VAT</td><td>£1.0bn underlying retail operating profit</td><td>600+ supermarkets and 885 convenience stores</td></tr>
+          <tr><td>Asda</td><td>Around £24.6bn turnover, latest cited accounts</td><td>Around £217m profit before tax</td><td>Around 1,100 stores</td></tr>
+          <tr><td>Lidl GB</td><td>£13.0bn turnover, FY2025/26</td><td>£345m operating profit</td><td>More than 1,000 stores</td></tr>
+          <tr><td>Waitrose</td><td>Around £7.3bn turnover in latest cited accounts</td><td>Around £138m profit before tax</td><td>Around 350 stores</td></tr>
+          <tr><td>M&S</td><td>£17.3bn group revenue, FY2025/26</td><td>£236m statutory profit after tax</td><td>Around 800 UK food stores, including owned and franchise locations</td></tr>
+          </tbody></table>
+          <p>Outlet numbers are rounded and can vary depending on whether convenience stores, petrol forecourts, concessions and franchise outlets are included. Sainsbury’s outlet count includes supermarkets and convenience stores; M&S includes its owned and franchise food stores.</p>
+          <h3>What do these figures tell us?</h3>
+          <p>The supermarket business operates on a high-volume, relatively low-margin model. Tesco’s FY2024/25 revenue of £69.9bn and profit before tax of £2.2bn equate to a simple profit-before-tax-to-revenue ratio of approximately 3.2%. Lidl GB’s FY2025/26 turnover of £13bn and operating profit of £345m equate to an operating margin of approximately 2.7%.</p>
+          <p>These are not directly comparable accounting measures, but they illustrate an important commercial reality: even small improvements in availability, waste, labour productivity or stock accuracy can have a material impact when applied across hundreds or thousands of stores.</p>
+
+          <h2 id="economic-contribution">3. How much does grocery retail contribute to the UK economy?</h2>
+          <p>Grocery retail is part of a much wider economic ecosystem. According to Defra’s 2025 food-chain statistics, the UK food and drink retail sector generated approximately <strong>£44.1bn in Gross Value Added (GVA) in 2024</strong>. GVA measures the value created by an industry after accounting for the value of goods and services it consumes in production. It is not the same as turnover or profit.</p>
+          <p>The wider UK agri-food chain contributed £162.3bn in GVA in 2024, equivalent to 6.2% of national GVA.</p>
+          <p>The retail sector also supports employment, transport, warehousing, food processing, agriculture, packaging, technology and other supplier industries. These figures show why supermarket performance matters beyond individual retailers: grocery supply chains are an important part of the UK’s economic infrastructure.</p>
+
+          <h2 id="household-spend">4. How much of household spending goes to supermarkets?</h2>
+          <p>In the financial year ending March 2025, the average UK household spent:</p>
+          <ul><li><strong>10.9% of total household expenditure</strong> on food and non-alcoholic drinks consumed at home.</li><li>£37.34 per person per week on household food and drink, including alcoholic drinks.</li><li>£50.03 per person per week on all food and drink, including eating out.</li></ul>
+          <p>Food is therefore one of the major recurring household expenditure categories. For households in the lowest 20% of disposable income, food and non-alcoholic drinks consumed at home accounted for an even higher 15.2% of expenditure.</p>
+          <h3>An approximate calculation for the four selected retailers</h3>
+          <p>The four retailers in this article have a combined grocery market share of 63.5%. Applying that share to the 10.9% household expenditure figure gives:</p>
+          <div class="callout"><p><strong>10.9% × 63.5% ≈ 6.9%</strong><br>This is a rough illustration of how much total household expenditure might flow through those four retailers, not an official measure. The household expenditure and grocery market-share measures have different scopes and periods.</p></div>
+
+          <h2 id="ireland-comparison">5. UK versus Ireland: Is the supermarket model successful?</h2>
+          <p>Ireland is a useful comparison because it is geographically close to the UK, shares many retail trends and has a competitive grocery market, but its supermarket hierarchy is different. The Republic of Ireland’s grocery market in October 2026 was reported as follows:</p>
+          <table><thead><tr><th>Retailer</th><th>Ireland grocery market share</th></tr></thead><tbody><tr><td>Dunnes Stores</td><td>24.8%</td></tr><tr><td>Tesco</td><td>24.0%</td></tr><tr><td>SuperValu</td><td>18.8%</td></tr><tr><td>Lidl</td><td>14.6%</td></tr><tr><td>Aldi</td><td>10.8%</td></tr></tbody></table>
+          <p>The comparison highlights several differences. Ireland has a strong concentration around domestic and established supermarket brands: Dunnes Stores holds the largest market share, Tesco is a close second, and SuperValu maintains a strong position.</p>
+          <p>Lidl has a substantially larger grocery market share in Ireland than in the UK: 14.6% compared with 8.6% in Great Britain in May 2026. This demonstrates that the discount model can achieve different levels of penetration in neighbouring markets, depending on consumer behaviour, local competition and the retailer’s expansion strategy.</p>
+          <p>Premium and value segments coexist. Dunnes, Tesco and SuperValu compete across mainstream grocery retail, while Lidl and Aldi provide a strong value proposition. Irish market data also indicates growth in premium own-label ranges, showing that shoppers are not exclusively focused on the lowest price.</p>
+          <p>The comparison does not establish that Ireland is a more successful supermarket model overall. The markets differ in population, household expenditure, competition and store networks. It does, however, show that the UK and Ireland have room for different retail formats to grow.</p>
+
+          <h2 id="growth-opportunities">6. Where are the opportunities for UK grocery retail?</h2>
+          <p>The UK supermarket model is already mature, with large retailers operating extensive store networks and sophisticated supply chains. Future growth is likely to depend not only on opening more stores, but also on improving performance across existing operations.</p>
+          <h3>Improving availability and reducing lost sales</h3><p>A product recorded in stock but unavailable on the shelf can represent a missed sale. Retailers can improve stock accuracy, replenishment timing and store-level visibility to reduce these gaps.</p>
+          <h3>More effective demand forecasting</h3><p>Weather, promotions, local events and customer behaviour can cause demand to vary considerably between stores. Better forecasting can help retailers order the right quantities and reduce both stockouts and waste.</p>
+          <h3>Stronger store-level analytics</h3><p>Retailers can compare sales, availability, waste, labour productivity and customer feedback across stores to identify operational patterns. This can help distinguish stores that are genuinely performing well from those whose results are affected by poor stock management or execution.</p>
+          <h3>Growth in premium and value-led retail</h3><p>The UK market contains both strong discount retailers and premium food businesses. Lidl’s growth and the continued presence of Waitrose and M&S demonstrate that different customer propositions can succeed. There may be opportunities to improve understanding of local customer demand, particularly where product range, pricing and availability differ between neighbourhoods.</p>
+
+          <h2 id="market-conclusion">Conclusion</h2>
+          <p>The UK grocery market demonstrates the success of large-scale, data-driven retail operations. Tesco, Sainsbury’s, Asda and Lidl collectively command a substantial share of grocery sales, support extensive store networks and contribute to a food retail sector that generates tens of billions of pounds in economic value.</p>
+          <p>Ireland provides a useful neighbouring comparison, particularly through Lidl’s stronger market position and the presence of Dunnes Stores and SuperValu. It shows that successful grocery retail is not based on one universal store format or pricing strategy.</p>
+          <p>For a retail analyst, the most important opportunity is to understand what drives the performance of individual stores and product categories. Market share and turnover establish the scale of the business; analytics explains how retailers can improve sales, availability, stock efficiency and profitability within that scale.</p>
+        </section>
+
+        <div class="article-divider"></div>
+        <section id="sources"><h2>Sources and further reading</h2><p>The articles reflect the research and figures assembled for this feature. Retailer reporting periods and financial definitions vary, and market-share figures are time-specific. Check the original source before reusing figures in a formal business report.</p>
+          <ul class="source-list">
+            <li><a href="https://www.tescoplc.com/investors/reports-results-and-presentations/annual-report-2025" target="_blank" rel="noopener">Tesco — Annual Report 2025</a></li>
+            <li><a href="https://corporate.sainsburys.co.uk/investors/annual-report-2025/" target="_blank" rel="noopener">Sainsbury’s — Annual Report 2025</a></li>
+            <li><a href="https://www.asda.jobs/everything/we-do/departments/data-and-data-analytics" target="_blank" rel="noopener">Asda — Data &amp; Data Analytics</a></li>
+            <li><a href="https://careers.lidl.co.uk/regional-offices/supply-chain" target="_blank" rel="noopener">Lidl — Supply Chain</a></li>
+            <li><a href="https://www.johnlewispartnership.co.uk/media-centre/latest-news/2025/23852" target="_blank" rel="noopener">Waitrose — Supply-chain technology and availability</a></li>
+            <li><a href="https://corporate.marksandspencer.com/" target="_blank" rel="noopener">Marks &amp; Spencer — Corporate reporting</a></li>
+            <li><a href="https://www.thegrocer.co.uk/news/waitrose-to-begin-estate-wide-rollout-of-inventory-management-tech/723633.article" target="_blank" rel="noopener">The Grocer — Waitrose inventory-management rollout</a></li>
+            <li><a href="https://www.gov.uk/government/statistics/food-statistics-pocketbook/food-statistics-in-your-pocket" target="_blank" rel="noopener">Defra — Food Statistics in Your Pocket</a></li>
+            <li><a href="https://www.gov.uk/government/statistics/agriculture-in-the-united-kingdom-2025/chapter-14-the-food-chain" target="_blank" rel="noopener">Defra — The Food Chain, 2025</a></li>
+            <li><a href="https://www.rte.ie/news/business/2026/1019/1595958-worldpanel-by-numerator-supermarket-figures/" target="_blank" rel="noopener">RTÉ — Irish grocery market figures, October 2026</a></li>
+          </ul>
+        </section>
+      </article>
+      <aside class="article-sidebar"><h3>In this article</h3><nav><a href="#article-retail">Retail analytics practices</a><a href="#retailer-practices">Leading retailers</a><a href="#analyst-meaning">What analysts do</a><a href="#practical-example">Practical example</a><a href="#retail-kpis">Retail KPIs</a><a href="#article-market">UK grocery market</a><a href="#market-share">Market share</a><a href="#turnover-profit">Turnover &amp; outlets</a><a href="#economic-contribution">Economic contribution</a><a href="#household-spend">Household spending</a><a href="#ireland-comparison">Ireland comparison</a><a href="#growth-opportunities">Opportunities</a><a href="#sources">Sources</a></nav></aside>
+    </section>
+  </main>
+  <footer class="article-footer"><div class="section-wrap">© <span id="year"></span> Business Intelligence Studio · Retail Analytics Feature</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
