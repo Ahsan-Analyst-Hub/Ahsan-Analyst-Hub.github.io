@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Modern POS analytics explained: market basket analysis, product performance, store operations, promotion measurement and responsible loss prevention. Practical examples for retail and hospitality.">
+<title>Modern POS Analytics | Business Intelligence Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.article-hero{padding:76px 0 58px;background:linear-gradient(135deg,#f0f6f1,#fbfcfa 70%);border-bottom:1px solid var(--line)}
+.article-hero h1{font:600 clamp(38px,5vw,62px)/1.12 Manrope,sans-serif;letter-spacing:-.055em;max-width:900px;margin:18px 0}
+.article-hero .lead{font-size:17px;line-height:1.85;color:#62736c;max-width:800px;margin:0}
+.article-meta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6d8c7d;font-weight:700;margin-top:25px}
+.article-layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:60px;padding-top:58px;padding-bottom:85px;align-items:start}
+.article-content{min-width:0;max-width:850px}.article-content h2{font:600 clamp(26px,3vw,36px)/1.2 Manrope,sans-serif;letter-spacing:-.04em;margin:48px 0 18px}.article-content h3{font:700 20px/1.35 Manrope,sans-serif;margin:30px 0 12px}.article-content p,.article-content li{font-size:14px;line-height:1.9;color:#52645c}.article-content p{margin:0 0 18px}.article-content ul,.article-content ol{padding-left:22px;margin:12px 0 24px}.article-content li{margin:7px 0}.article-content strong{color:#243b32}.article-content a{color:#2e7969;text-decoration:underline;text-underline-offset:3px}
+.article-content table{width:100%;border-collapse:collapse;margin:20px 0 28px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12px}.article-content th,.article-content td{text-align:left;padding:12px 13px;border-bottom:1px solid #e8eee9;vertical-align:top}.article-content th{background:#edf5f0;color:#315f51;font-size:10px;letter-spacing:.05em;text-transform:uppercase}.article-content td{color:#52645c;line-height:1.65}.article-content tr:last-child td{border-bottom:0}.article-content .callout{background:#f0f6f1;border-left:3px solid var(--teal);padding:20px 23px;margin:25px 0;border-radius:0 10px 10px 0}.article-content .callout p{margin:0}.article-sidebar{position:sticky;top:115px;background:#f3f7f3;border:1px solid #e0e9e1;border-radius:14px;padding:22px}.article-sidebar h3{font:700 13px Manrope,sans-serif;margin:0 0 12px}.article-sidebar a{display:block;font-size:11px;color:#59766b;padding:8px 0;border-bottom:1px solid #e0e9e1}.article-sidebar a:last-child{border-bottom:0}.article-divider{height:1px;background:var(--line);margin:62px 0}.source-list{font-size:12px;color:#607168;padding-left:20px}.source-list li{font-size:12px;overflow-wrap:anywhere}.article-footer{background:#f0f4f0;border-top:1px solid #e0e8e1;padding:24px 0;color:#75837b;font-size:10px}
+@media(max-width:850px){.article-layout{grid-template-columns:1fr;gap:30px}.article-sidebar{position:static;order:-1}.article-sidebar nav{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.article-hero{padding:52px 0 42px}}
+@media(max-width:560px){.article-content table{font-size:11px}.article-content th,.article-content td{padding:9px 8px}.article-sidebar nav{grid-template-columns:1fr}.article-hero .lead{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="announcement"><span class="announcement-dot"></span> BUSINESS INTELLIGENCE STUDIO · POS ANALYTICS</div>
+<header class="site-header">
+<a class="brand" href="index.html" aria-label="Business Intelligence Studio home"><span class="brand-mark"><span></span><span></span><span></span><span></span></span><span class="brand-copy"><strong>BUSINESS INTELLIGENCE</strong><small>DATA · INSIGHT · ACTION</small></span></a>
+<button class="mobile-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+<nav class="main-nav" aria-label="Main navigation">
+<div class="nav-group"><button class="nav-trigger" aria-expanded="false">Products <span class="chevron">⌄</span></button><div class="dropdown"><a href="index.html#retail"><strong>Retail Analytics</strong><small>Sales, stock and store performance</small></a><a href="index.html#feedback"><strong>Customer Feedback Intelligence</strong><small>Turn feedback into practical insight</small></a><a href="index.html#projects"><strong>POS Analysis</strong><small>Understand transactions and trends</small></a></div></div>
+<div class="nav-group"><button class="nav-trigger" aria-expanded="false">Resources <span class="chevron">⌄</span></button><div class="dropdown"><a href="#article"><strong>Modern POS Analytics</strong><small>Operational value and loss prevention</small></a><a href="#sources"><strong>Sources & validation</strong><small>References and evidence notes</small></a></div></div>
+<a class="nav-cta" href="index.html#contact">Get in touch <span>↗</span></a>
+</nav></header>
+<main>
+<section class="article-hero"><div class="section-wrap"><div class="eyebrow"><span class="eyebrow-line"></span> POS ANALYTICS · RETAIL & HOSPITALITY</div><h1>Modern POS Analytics: Turning Transactions into Operational Value</h1><p class="lead">Point-of-sale data can show what customers buy, when demand changes, how promotions perform and where store processes may be failing. The value comes from connecting transaction records to the right business question—and using the evidence to take a measured action.</p><div class="article-meta">Business intelligence · Retail operations · Loss prevention</div></div></section>
+<section class="section-wrap article-layout">
+<article class="article-content" id="article">
+<div class="eyebrow"><span class="eyebrow-line"></span> PRACTICAL GUIDE</div>
+<h2>What is POS analytics—and why does it matter?</h2>
+<p>Point-of-Sale (POS) analytics is the process of analysing transaction and checkout data to understand sales performance and how a business operates. A POS record may contain the store, date and time, products, quantities, prices, discounts, payment status and cashier or lane identifier. When combined—carefully and lawfully—with inventory, staffing, promotion or customer-feedback data, it can help explain patterns that a sales total alone cannot.</p>
+<p>A daily report might say that a branch sold £18,000. POS analytics asks more useful questions: Which products drove that result? Was the increase caused by a promotion? Did sales fall because demand weakened or because products were unavailable? Were checkout delays concentrated in one time window?</p>
+<div class="callout"><p><strong>Important distinction:</strong> POS analytics does not automatically mean real-time AI. Many valuable analyses are built with validated daily extracts, SQL, Excel or Power BI. Real-time feeds and machine-learning models are options when the business case and data quality justify them.</p></div>
+<h2 id="basket">1. Basket analysis: understand what products are bought together</h2>
+<p>Market basket analysis looks for products that appear together in the same transaction. Retailers can use it to inform complementary product placement, bundles, cross-selling and promotional planning. Snowflake’s retail market-basket material describes using POS data to identify product affinities and enrich them with other customer or business data; Oracle’s retail analytics documentation explains measures such as support and confidence for association rules.</p>
+<h3>Illustrative example: a convenience store</h3>
+<p>Suppose an analysis of 10,000 baskets finds that 620 contain both coffee and a breakfast pastry. That is a 6.2% basket support for the pair. If 1,500 baskets contain coffee, then 620 ÷ 1,500 = 41.3% of coffee baskets also contain a pastry (confidence for the rule “coffee → pastry”). These are made-up numbers for demonstrating the calculation, not retailer results.</p>
+<p>The next step is to test whether placing the items together or offering a bundle increases <em>incremental</em> sales and margin. A high association alone does not prove that a promotion will cause customers to buy more; the products may already be bought together.</p>
+<h2 id="product">2. Product performance and assortment: separate demand from availability</h2>
+<p>SKU-level sales analysis can reveal fast- and slow-moving products, differences by store, and changes after a price or range decision. But POS scans record completed sales, not all demand. If an item is out of stock, its sales may fall even while customers still want it.</p>
+<h3>Illustrative example: stock discrepancy</h3>
+<p>A branch’s inventory system shows 12 units of a popular item, but the shelf is empty and no units have scanned for two trading days. That is a signal to investigate—not evidence of theft. The analyst should check delivery receipts, shelf replenishment, stock adjustments, waste, back-room locations and other stores’ sales before concluding whether the cause is a stock-record error, misplacement, damage or an actual loss.</p>
+<ul><li>Compare POS sales with stock movements and physical counts.</li><li>Track availability and out-of-stock duration alongside sales velocity.</li><li>Where possible, include substitutions or abandoned demand from another source; POS alone cannot see purchases that never happened.</li></ul>
+<h2 id="daypart">3. Daypart and lane performance: find operational bottlenecks</h2>
+<p>Grouping transactions by hour, day of week, store and checkout lane can help show when trading peaks occur and whether throughput or service measures change. For restaurants, menu-item sales and order timestamps can be compared with kitchen preparation or fulfilment times—if those measures are captured separately.</p>
+<h3>Illustrative example: lunch rush</h3>
+<p>A café’s 12:00–14:00 sales volume rises by 18% week-on-week, while average order-to-ready time also increases. This suggests the lunch period deserves a closer look. The operator might compare staffing, order complexity, equipment downtime and delivery mix before changing the rota. The example figures are hypothetical and do not establish that sales growth caused slower service.</p>
+<p>Useful measures include transactions per lane-hour, average items per basket, sales by daypart, void/override rates, and—where reliable timestamps exist—queue or fulfilment time. Compare like-for-like periods and account for promotions, holidays and store differences.</p>
+<h2 id="promotions">4. Promotion analytics: measure incremental value, not just sales spikes</h2>
+<p>A promotion can increase units sold while reducing profit, or simply shift purchases from another product or week. POS data helps compare promoted and non-promoted items, average selling price, discount cost, gross margin and basket effects.</p>
+<h3>Illustrative example: discount evaluation</h3>
+<p>A product sells 1,000 units in a comparable baseline week and 1,250 units during a promotion. The observed increase is 25%, but it is not automatically a 25% promotion lift. The analyst should account for seasonality, store traffic, competitor activity, stock availability and whether customers bought earlier or later than usual. A control group of similar stores or products can provide a stronger estimate.</p>
+<p>For in-store media, a sales spike shortly after a display or advert is a useful observation, but timing alone does not prove attribution. A controlled test or a carefully matched comparison is preferable where decisions involve meaningful spend.</p>
+<h2 id="loss">5. Loss prevention and exception analytics: investigate unusual events fairly</h2>
+<p>POS exception analytics can highlight transactions that merit review, such as repeated voids, refunds, discounts, price overrides, no-sale events or unusual patterns by lane and time. Agilence and NCR Voyix describe solutions that analyse transaction patterns and surface risk indicators for loss-prevention teams. These tools support prioritisation; they do not establish intent or prove misconduct.</p>
+<h3>Illustrative example: repeated voids</h3>
+<p>One register shows a higher void rate than comparable lanes. Before making an allegation, an investigator should check whether the lane has a faulty scanner, a different transaction mix, training issues, legitimate price corrections or a supervisor-approved process. Review should follow company policy, access controls and applicable employment and privacy requirements. A flag is a starting point for a fair investigation—not a verdict.</p>
+<p>Computer vision or camera matching may be used in some deployments, but it is not a standard feature of every POS analytics stack. Any use should be described specifically, with its data quality, privacy, security and governance implications considered.</p>
+<h2 id="stack">6. A practical POS analytics stack</h2>
+<p>Most projects can start with a simple and auditable workflow:</p>
+<ol><li><strong>Extract:</strong> obtain transaction-line data, store and product reference tables, plus only the operational sources needed for the question.</li><li><strong>Validate:</strong> check duplicate transaction lines, missing timestamps, refunds, cancelled sales, tax and discount treatment, and store/product identifiers.</li><li><strong>Model:</strong> organise the data into clear transaction, product, store and date tables; document KPI definitions.</li><li><strong>Analyse:</strong> use SQL or Power Query for cleaning and joining, then Power BI or another BI tool for measures and dashboards.</li><li><strong>Act and evaluate:</strong> assign an owner, record the intervention, and compare results with a suitable baseline or control.</li></ol>
+<p>Cloud warehouses such as Snowflake or Databricks may be appropriate for large, multi-source environments. They are infrastructure choices, not prerequisites for useful POS analysis. A smaller retailer may begin with exports and a well-governed BI model.</p>
+<h2 id="feedback">7. Connect POS behaviour with customer feedback</h2>
+<p>POS analytics shows what was purchased and how checkout or fulfilment performed. Customer feedback adds what the experience felt like. If customers report long waits during a busy period, an analyst can compare those comments with transaction volume, lane availability or order timestamps—provided the feedback can be linked at an appropriate, privacy-conscious level.</p>
+<div class="callout"><p><strong>Example of an evidence-led action:</strong> feedback repeatedly mentions lunch queues; POS shows the lunch peak; operational timestamps confirm service time increased; a pilot adjusts handover or checkout coverage. The team then checks whether waiting time and customer ratings improve without creating problems elsewhere.</p></div>
+<h2 id="comparison">What different POS analytics tools are designed to do</h2>
+<table><thead><tr><th>Tool or platform</th><th>Relevant capability</th><th>What not to assume</th></tr></thead><tbody>
+<tr><td>Snowflake</td><td>Data platform and retail market-basket analysis examples; combine POS with other datasets.</td><td>It is not, by itself, a ready-made retailer loss-prevention product.</td></tr>
+<tr><td>Agilence</td><td>Retail loss-prevention and operational analytics; exception review and case workflows.</td><td>A flagged void or refund is not proof of fraud.</td></tr>
+<tr><td>NCR Voyix</td><td>Retail POS and loss-prevention capabilities, including transaction-pattern analysis and produce lookup assistance.</td><td>Specific capabilities depend on product, configuration and deployment.</td></tr>
+<tr><td>Toast</td><td>Restaurant reporting for sales, menu mix and labour; reports and comparisons across locations/time periods.</td><td>Not every restaurant POS exposes the same data or updates at the same frequency.</td></tr>
+<tr><td>Clover</td><td>Sales reports, busiest times, best-selling items, refunds/discounts and location comparisons.</td><td>Native reports do not automatically provide advanced attribution or machine learning.</td></tr>
+</tbody></table>
+<h2 id="conclusion">Conclusion: start with a business question</h2>
+<p>Modern POS analytics is not about collecting every possible data point or adding AI to every dashboard. It is about using trustworthy transaction data to answer a defined question, checking alternative explanations and translating the finding into an action that can be evaluated.</p>
+<p>For a retailer, that might mean testing a better replenishment process, refining a promotion or reviewing a checkout bottleneck. For a restaurant, it might mean understanding menu mix, labour alignment or order fulfilment. The strongest analysis makes the reasoning visible—from data quality and comparison through to the decision and its measured outcome.</p>
+<div class="article-divider"></div>
+<section id="sources"><h2>Sources and reference checks</h2><p>The sources below support the general capabilities described in this article. Product claims are attributed to vendors and should be treated as descriptions of their own offerings. Examples and calculations in the article are illustrative, not reported case-study results.</p>
+<ul class="source-list">
+<li><a href="https://www.snowflake.com/en/resources/webinar/thought-leadership/retail-market-basket-analysis/" target="_blank" rel="noopener">Snowflake — Retail Market Basket Analysis</a>. Relevant to POS-based product affinity and combining sales with other data.</li>
+<li><a href="https://www.agilenceinc.com/solutions/retail" target="_blank" rel="noopener">Agilence — Retail loss prevention and operational excellence</a>. Vendor description of transaction exception, returns/refunds, inventory and case-management capabilities.</li>
+<li><a href="https://www.ncr.com/platform/retail-applications/loss-prevention" target="_blank" rel="noopener">NCR Voyix — Retail loss prevention</a>. Supports discussion of POS transaction indicators, voids, refunds, overrides and produce lookup support.</li>
+<li><a href="https://pos.toasttab.com/uk/products/reporting" target="_blank" rel="noopener">Toast — Restaurant reporting and analytics</a>. Supports sales, menu, labour and comparative reporting capabilities.</li>
+<li><a href="https://www.clover.com/pos-systems/business-tracking-reporting" target="_blank" rel="noopener">Clover — POS reporting and sales tracking</a>. Supports sales trends, busy periods, best-selling items and refunds/discount reporting.</li>
+<li><a href="https://www.oracle.com/retail/" target="_blank" rel="noopener">Oracle Retail</a>. Retail analytics documentation has historically described market-basket metrics such as support and confidence; consult the applicable product documentation for exact definitions.</li>
+</ul>
+<h3>Review of the original references</h3>
+<ul><li><strong>ReBiz:</strong> the supplied retail-sales article is a vendor-authored overview. It may be useful for industry context, but it is not independent validation of universal trends or specific POS platform claims.</li>
+<li><strong>SwiftForce:</strong> the supplied 2026 trend article is vendor-authored. Broad claims such as a 50% checkout-time reduction or industry-wide deployment of smart carts were not retained as established facts.</li>
+<li><strong>TechLink Services:</strong> the cited trend article was not used to substantiate specific technology or performance claims in this revision.</li>
+<li><strong>Strategy / MicroStrategy:</strong> the original URL path did not match the current article path. The revised article avoids relying on it for a claim about retail loss-prevention platform capabilities.</li>
+<li><strong>Snowflake:</strong> the original link is relevant to market basket analysis, but it is a webinar/product resource rather than independent evidence of commercial outcomes.</li></ul>
+</section>
+</article>
+<aside class="article-sidebar"><h3>IN THIS ARTICLE</h3><nav><a href="#article">What is POS analytics?</a><a href="#basket">Basket analysis</a><a href="#product">Product & stock</a><a href="#daypart">Daypart operations</a><a href="#promotions">Promotion measurement</a><a href="#loss">Loss prevention</a><a href="#stack">Analytics workflow</a><a href="#feedback">Customer feedback</a><a href="#comparison">Tools comparison</a><a href="#sources">Sources</a></nav></aside>
+</section></main>
+<footer class="article-footer"><div class="section-wrap">Business Intelligence Studio · POS Analytics · <span id="year"></span></div></footer>
+<script>document.addEventListener('DOMContentLoaded', () => {
+  const groups = document.querySelectorAll('.nav-group');
+  const nav = document.querySelector('.main-nav');
+  const toggle = document.querySelector('.mobile-toggle');
+
+  groups.forEach(group => {
+    const trigger = group.querySelector('.nav-trigger');
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !group.classList.contains('open');
+      groups.forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+      });
+      group.classList.toggle('open', willOpen);
+      trigger.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav-group')) {
+      groups.forEach(group => {
+        group.classList.remove('open');
+        group.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('mobile-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? '×' : '☰';
+  });
+
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    nav.classList.remove('mobile-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '☰';
+    groups.forEach(group => group.classList.remove('open'));
+  }));
+
+  document.querySelectorAll('.filter-button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+      document.querySelectorAll('.project-tile').forEach(tile => {
+        const show = filter === 'all' || tile.dataset.category === filter;
+        tile.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // This static site does not store form submissions. It prepares a mailto draft instead.
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const subject = encodeURIComponent('Website enquiry — ' + data.get('interest'));
+    const body = encodeURIComponent(
+      'Name: ' + data.get('name') + '\\n' +
+      'Email: ' + data.get('email') + '\\n' +
+      'Interest: ' + data.get('interest') + '\\n\\n' +
+      'Message:\\n' + data.get('message')
+    );
+    // Replace the placeholder address below with your preferred business email before publishing.
+    window.location.href = 'mailto:YOUR-EMAIL@example.com?subject=' + subject + '&body=' + body;
+    document.querySelector('.form-status').textContent = 'Your email app should open with the enquiry prepared. Add your real email address in script.js before publishing.';
+  });
+});
+</script>
+</body></html>
