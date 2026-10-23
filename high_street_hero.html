@@ -83,7 +83,7 @@ let selectedArea='',selectedMeasure='',scores={},askedPairs=new Set(),round=0,ch
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
 function drawChoices(target,items,handler){$(target).innerHTML='';items.forEach(item=>{const b=document.createElement('button');b.className='choice';b.textContent=item;b.addEventListener('click',()=>handler(item));$(target).appendChild(b)})}
 $('ready').onclick=()=>{drawChoices('areaChoices',areas,chooseArea);show('areas')};
-$('notReady').onclick=()=>{$('decline').textContent='You’re missing out on something BIG!';$('ready').disabled=true;$('notReady').textContent='Close game';$('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><p>You can close this tab whenever you’re ready.</p></div>'}};
+$('notReady').onclick=()=>{$('decline').textContent='You’re missing out on something BIG!';$('ready').disabled=true;$('notReady').textContent='Close game';$('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><a class="text-link" href="https://ahsan-analyst-hub.github.io/#home">Go to Home<span>→</span></a></p></div>'}};
 $('backWelcome').onclick=()=>show('welcome');$('backAreas').onclick=()=>show('areas');
 function chooseArea(area){selectedArea=area;drawChoices('measureChoices',measures,chooseMeasure);show('measures')}
 function chooseMeasure(measure){selectedMeasure=measure;scores={};brandLists[selectedArea].forEach(b=>scores[b]=0);askedPairs=new Set();round=0;$('activeKpi').textContent=selectedMeasure;nextMatch();show('play')}
