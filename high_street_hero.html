@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#315f51">
+<title>High Street Hero | Business Intelligence Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500,600,700&family=Manrope:wght@400;500,600,700,800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#243b32;--green:#2e7969;--deep:#315f51;--mint:#edf5f0;--paper:#f7faf7;--muted:#62736c;--line:#dce7df;--gold:#f2c75c;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:28px 16px;background:linear-gradient(135deg,#f0f6f1,#fbfcfa 70%);font:16px/1.55 "DM Sans",sans-serif;color:var(--ink);display:grid;place-items:center}
+button,input{font:inherit}
+.game{width:min(780px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 65px #243b3212}
+.top{padding:28px clamp(22px,5vw,42px);background:var(--mint);border-bottom:1px solid var(--line)}
+.eyebrow{display:flex;align-items:center;gap:9px;color:#6d8c7d;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.eyebrow:before{content:"";display:inline-block;width:22px;height:2px;background:var(--green)}
+.top h1{font:700 clamp(2rem,6vw,3.4rem)/1.05 Manrope,sans-serif;letter-spacing:-.055em;margin:15px 0 10px;color:var(--ink)}
+.top p{margin:0;color:#62736c;max-width:650px}
+.content{padding:clamp(20px,5vw,40px)}
+.screen{display:none}.screen.active{display:block}
+.question{font:700 clamp(1.2rem,3vw,1.55rem)/1.3 Manrope,sans-serif;margin:0 0 20px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:12px}
+.choice,.action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:15px 17px;font-weight:700;text-align:left;cursor:pointer;color:var(--ink);transition:transform .15s,border-color .15s,background .15s}
+.choice:hover,.action:hover{border-color:var(--green);transform:translateY(-2px);background:#fbfdfb}
+.choice:focus-visible,.action:focus-visible{outline:3px solid #a9cbb9;outline-offset:3px}
+.choice small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.action.primary{background:var(--deep);color:white;border-color:var(--deep);text-align:center}
+.action.primary:hover{background:var(--green)}
+.action.secondary{text-align:center;background:#f4f7f4}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:.9rem;color:var(--muted)}
+.versus{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:14px}
+.versus .choice{text-align:center;min-height:145px;font:700 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;display:grid;place-content:center;overflow-wrap:anywhere}
+.vs{align-self:center;font-weight:800;color:#6d8c7d;font-size:.8rem;letter-spacing:.1em}
+.kpi-reminder{position:sticky;top:10px;z-index:2;margin:0 auto 22px;max-width:580px;text-align:center;padding:15px 18px;border:2px solid var(--green);border-radius:12px;background:#f0f6f1;box-shadow:0 8px 24px #243b3210;animation:kpiPulse 1.8s ease-in-out infinite}
+.kpi-reminder .kpi-label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#6d8c7d;margin-bottom:3px}
+.kpi-reminder strong{display:block;font:800 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;color:var(--deep)}
+@keyframes kpiPulse{0%,100%{box-shadow:0 0 0 0 #2e79691a;border-color:#2e7969}50%{box-shadow:0 0 0 5px #2e796914;border-color:#79a891}}
+.progress{height:7px;background:#e9f0eb;border-radius:99px;overflow:hidden;margin:20px 0 12px}
+.progress span{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.result{background:var(--mint);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,5vw,32px);text-align:center}
+.result h2{font:700 clamp(1.7rem,5vw,2.4rem)/1.15 Manrope,sans-serif;margin:12px 0;color:var(--deep);overflow-wrap:anywhere}
+.champion{font:800 1.2rem Manrope,sans-serif;color:var(--green)}
+label{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],input[type=email]{width:100%;padding:13px;border:1px solid #bdcbbf;border-radius:9px;font:inherit}
+input:focus{outline:3px solid #d4e6d9;border-color:var(--green)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;font-weight:500}.consent input{margin-top:5px}
+.error{color:#a33b2f;font-size:.9rem;min-height:1.3em}
+.footer{padding:0 clamp(22px,5vw,42px) 24px;color:#75837b;font-size:.72rem}
+@media(max-width:520px){body{padding:10px}.top{padding:23px 22px}.versus{gap:6px}.versus .choice{padding:12px 7px;min-height:120px;font-size:1rem}.vs{font-size:.65rem}.kpi-reminder{top:4px;padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="game" aria-live="polite">
+<header class="top"><div class="eyebrow">A quick customer choice game</div><h1>High Street Hero</h1><p>Pick the brands you rate most. Your choices help us understand what matters the MOST.</p></header>
+<div class="content">
+<section class="screen active" id="welcome"><p class="question">You ready to Play Game: High Street Hero?</p><div class="actions"><button class="action primary" id="ready">Yes, let's play!</button><button class="action secondary" id="notReady">Not today</button></div><p class="note" id="decline" role="status"></p></section>
+<section class="screen" id="areas"><p class="question">Choose an area to play</p><div class="grid" id="areaChoices"></div><div class="actions"><button class="action secondary" id="backWelcome">Back</button></div></section>
+<section class="screen" id="measures"><p class="question">Which measure would you like to choose?</p><div class="grid" id="measureChoices"></div><div class="actions"><button class="action secondary" id="backAreas">Back</button></div></section>
+<section class="screen" id="play"><div class="kpi-reminder" aria-live="polite"><span class="kpi-label">You are rating brands on this measure</span><strong id="activeKpi"></strong></div><div class="eyebrow" id="context"></div><p class="question">Which brand do you prefer?</p><div class="versus" id="match"></div><div class="progress" aria-label="Score progress"><span id="bar"></span></div><p class="note" id="scoreNote"></p></section>
+<section class="screen" id="winner"><div class="result"><div class="eyebrow" style="justify-content:center">Your High Street Hero</div><h2 id="winnerName"></h2><p>is your top choice for</p><p class="champion" id="winnerMeasure"></p><p id="winnerSummary"></p></div><p class="question" style="margin-top:24px">Would you like to enter our lucky draw to win a £50 grocery shopping coupon?</p><div class="actions"><button class="action primary" id="enterDraw">Yes, enter me</button><button class="action secondary" id="skipDraw">No thanks</button></div></section>
+<section class="screen" id="entry"><p class="question">Enter the lucky draw</p><p class="note">Please provide your details below. This demo does not send or store entries; a live draw needs a secure form and clear privacy/competition terms.</p><form id="entryForm"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="100"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"><label class="consent"><input id="consent" type="checkbox" required><span>I agree to be contacted about this prize draw. (Add your full privacy notice and draw terms before launch.)</span></label><p class="error" id="entryError" role="alert"></p><div class="actions"><button class="action primary" type="submit">Submit entry</button><button class="action secondary" type="button" id="cancelEntry">Cancel</button></div></form></section>
+<section class="screen" id="thanks"><div class="result"><h2>Thank you for your feedback!</h2><p id="thanksText">Your choices have been recorded in this game session.</p></div><div class="actions"><button class="action primary" id="restart">Play again</button></div></section>
+</div><footer class="footer">Prototype • Customer brand comparisons • No personal data is transmitted</footer>
+</main>
+<script>
+const brandLists={
+'Grocery Stores':['Tesco','Sainsbury’s','Asda','Aldi','Lidl','Morrisons','Co-op','Waitrose','Iceland','Ocado'],
+'Clothing Brands':['Next','Marks & Spencer (M&S)','Primark','JD Sports','TK Maxx','H&M','Zara','New Look','Asda (George)','Sports Direct'],
+'DIY & Electronics':['B&Q','Screwfix','Currys','Halfords','Wickes','Toolstation','Euro Car Parts','AO.com','Richer Sounds','The Range'],
+'Restaurants & Food':['Greggs','McDonald’s','J D Wetherspoon','Nando’s','Subway','Domino’s Pizza','KFC','Wagamama','PizzaExpress','Pizza Hut'],
+'Cafes':['Costa Coffee','Greggs','Starbucks','Caffè Nero','Pret A Manger','GAIL’s Artisan Bakery','Black Sheep Coffee','Coffee #1','Blank Street Coffee','Tim Hortons'],
+'Department Stores':['John Lewis & Partners','Marks & Spencer (M&S)','IKEA','Selfridges','Harrods','Harvey Nichols','Fortnum & Mason','Liberty London','House of Fraser','Fenwick']
+};
+const areas=Object.keys(brandLists);
+const measures=['Value for Money & Pricing','Product Quality & Choice','Guarantees & Aftercare','Customer Care & Complaint Resolution','Friendliness & Approachability','Atmosphere & Accessibility','Cleanliness & Store Standards','Service Speed & Convenience','Digital & Omnichannel Experience','Brand Trust & Sustainability'];
+const $=id=>document.getElementById(id);
+let selectedArea='',selectedMeasure='',scores={},askedPairs=new Set(),round=0,champion='';
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+function drawChoices(target,items,handler){$(target).innerHTML='';items.forEach(item=>{const b=document.createElement('button');b.className='choice';b.textContent=item;b.addEventListener('click',()=>handler(item));$(target).appendChild(b)})}
+$('ready').onclick=()=>{drawChoices('areaChoices',areas,chooseArea);show('areas')};
+$('notReady').onclick=()=>{$('decline').textContent='You’re missing out on something BIG!';$('ready').disabled=true;$('notReady').textContent='Close game';$('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><p>You can close this tab whenever you’re ready.</p></div>'}};
+$('backWelcome').onclick=()=>show('welcome');$('backAreas').onclick=()=>show('areas');
+function chooseArea(area){selectedArea=area;drawChoices('measureChoices',measures,chooseMeasure);show('measures')}
+function chooseMeasure(measure){selectedMeasure=measure;scores={};brandLists[selectedArea].forEach(b=>scores[b]=0);askedPairs=new Set();round=0;$('activeKpi').textContent=selectedMeasure;nextMatch();show('play')}
+function nextMatch(){
+ const brands=brandLists[selectedArea],active=brands.filter(b=>scores[b]<5);
+ if(active.length<=1){finish(active[0]||Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0]);return}
+ let first,second,pair,tries=0;
+ do{
+   const sorted=active.slice().sort((a,b)=>scores[b]-scores[a]);
+   first=sorted[0];
+   const candidates=active.filter(b=>b!==first);
+   second=candidates[Math.floor(Math.random()*candidates.length)];
+   if(Math.random()<.35){first=active[Math.floor(Math.random()*active.length)];const challengers=active.filter(b=>b!==first);second=challengers[Math.floor(Math.random()*challengers.length)]}
+   pair=[first,second].sort().join('|');tries++;
+ }while(askedPairs.has(pair)&&tries<30);
+ askedPairs.add(pair);round++;
+ $('context').textContent=selectedArea+' • Round '+round;
+ $('match').innerHTML='';
+ [first,second].forEach((brand,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=brand;b.onclick=()=>vote(brand);$('match').appendChild(b);if(i===0){const vs=document.createElement('span');vs.className='vs';vs.textContent='OR';$('match').appendChild(vs)}});
+ const leader=Math.max(...Object.values(scores));
+ $('bar').style.width=Math.min(100,leader*20)+'%';
+ $('scoreNote').textContent='Choose one. First brand to 5 points wins. Current leading score: '+leader+'/5.';
+}
+function vote(brand){scores[brand]++;if(scores[brand]>=5){finish(brand);return}nextMatch()}
+function finish(brand){champion=brand;$('winnerName').textContent=brand;$('winnerMeasure').textContent=selectedMeasure;$('winnerSummary').textContent='You selected '+brand+' most often in your comparisons. It reached '+scores[brand]+' points.';show('winner')}
+$('enterDraw').onclick=()=>show('entry');$('skipDraw').onclick=()=>{$('thanksText').textContent='Your feedback has been recorded in this game session. You chose not to enter the draw.';show('thanks')};$('cancelEntry').onclick=()=>show('winner');
+$('entryForm').onsubmit=e=>{e.preventDefault();if(!$('consent').checked){$('entryError').textContent='Please tick the contact consent box to continue.';return}const entry={name:$('name').value.trim(),email:$('email').value.trim(),area:selectedArea,measure:selectedMeasure,winner:champion,scores:{...scores},submittedAt:new Date().toISOString()};window.highStreetHeroDemoEntry=entry;$('thanksText').textContent='Thanks, '+entry.name+'. Your demo entry is held only in this page session and has not been sent to a draw organiser.';show('thanks')};
+$('restart').onclick=()=>{$('decline').textContent='';$('ready').disabled=false;$('notReady').textContent='Not today';show('welcome')};
+</script></body></html>
