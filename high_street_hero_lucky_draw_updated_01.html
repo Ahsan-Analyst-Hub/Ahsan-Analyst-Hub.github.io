@@ -86,13 +86,13 @@ input:focus{outline:3px solid #d4e6d9;border-color:var(--green)}
   <label class="consent"><input id="entryConsent" name="entry_consent" type="checkbox" required><span>I wish to enter the High Street Hero Lucky Draw and understand that my entry will be subject to the Prize Draw Terms &amp; Conditions.</span></label>
   <label class="consent"><input id="marketingConsent" name="marketing_consent" type="checkbox"><span>I agree to receive occasional marketing emails from Business Intelligence Studio about its services, projects, research and future activities. I understand that I can unsubscribe at any time.</span></label>
   <label class="consent"><input id="termsConsent" name="terms_acceptance" type="checkbox" required><span>I have read and agree to the <a href="high_street_hero_terms.html" target="_blank" rel="noopener">High Street Hero Prize Draw Terms &amp; Conditions</a>.</span></label>
-  <p class="note privacy-note">Your details will be used to administer the prize draw. Marketing emails will only be sent if you separately choose the optional marketing checkbox. A dedicated Privacy Notice will be linked here before the live form is launched.</p>
+  <p class="note privacy-note">Your details will be used to administer the prize draw. Marketing emails will only be sent if you separately choose the optional marketing checkbox. </p>
   <p class="error" id="entryError" role="alert"></p>
   <div class="actions"><button class="action primary" type="submit">Submit entry</button><button class="action secondary" type="button" id="cancelEntry">Cancel</button></div>
  </form>
 </section>
 <section class="screen" id="thanks"><div class="result"><h2>Thank you for your feedback!</h2><p id="thanksText">Your choices have been recorded in this game session.</p></div><div class="actions"><button class="action primary" id="restart">Play again</button></div></section>
-</div><footer class="footer">Prototype • Customer brand comparisons • No personal data is transmitted</footer>
+</div><footer class="footer">Customer brand comparisons • No personal data is transmitted</footer>
 </main>
 <script>
 const brandLists={
@@ -180,7 +180,7 @@ $('notReady').onclick=()=>{
  $('decline').textContent='You’re missing out on something BIG!';
  $('ready').disabled=true;
  $('notReady').textContent='Close game';
- $('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><a class="text-link" href="https://ahsan-analyst-hub.github.io/#home">Go to Home<span>→</span></a></div>';};
+ $('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><a class="back-link" href="https://ahsan-analyst-hub.github.io/#home">Back to Business Intelligence Studio</a></div>';};
 };
 $('backWelcome').onclick=()=>show('welcome');
 $('backAreas').onclick=()=>show('areas');
