@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#315f51">
+<title>High Street Hero | Business Intelligence Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500,600,700&family=Manrope:wght@400;500,600,700,800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#243b32;--green:#2e7969;--deep:#315f51;--mint:#edf5f0;--paper:#f7faf7;--muted:#62736c;--line:#dce7df;--gold:#f2c75c;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:0;background:linear-gradient(135deg,#f0f6f1,#fbfcfa 70%);font:16px/1.55 "DM Sans",sans-serif;color:var(--ink)}
+button,input{font:inherit}
+.game{width:min(780px,calc(100% - 32px));margin:34px auto;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 65px #243b3212}
+.top{padding:28px clamp(22px,5vw,42px);background:var(--mint);border-bottom:1px solid var(--line)}
+.eyebrow{display:flex;align-items:center;gap:9px;color:#6d8c7d;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.eyebrow:before{content:"";display:inline-block;width:22px;height:2px;background:var(--green)}
+.top h1{font:700 clamp(2rem,6vw,3.4rem)/1.05 Manrope,sans-serif;letter-spacing:-.055em;margin:15px 0 10px;color:var(--ink)}
+.top p{margin:0;color:#62736c;max-width:650px}
+.content{padding:clamp(20px,5vw,40px)}
+.screen{display:none}.screen.active{display:block}
+.question{font:700 clamp(1.2rem,3vw,1.55rem)/1.3 Manrope,sans-serif;margin:0 0 20px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:12px}
+.choice,.action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:15px 17px;font-weight:700;text-align:left;cursor:pointer;color:var(--ink);transition:transform .15s,border-color .15s,background .15s}
+.choice:hover,.action:hover{border-color:var(--green);transform:translateY(-2px);background:#fbfdfb}
+.choice:focus-visible,.action:focus-visible{outline:3px solid #a9cbb9;outline-offset:3px}
+.choice small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.action.primary{background:var(--deep);color:white;border-color:var(--deep);text-align:center}
+.action.primary:hover{background:var(--green)}
+.action.secondary{text-align:center;background:#f4f7f4}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:.9rem;color:var(--muted)}
+.versus{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:14px}
+.versus .choice{text-align:center;min-height:145px;font:700 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;display:grid;place-content:center;overflow-wrap:anywhere}
+.vs{align-self:center;font-weight:800;color:#6d8c7d;font-size:.8rem;letter-spacing:.1em}
+.kpi-reminder{position:sticky;top:10px;z-index:2;margin:0 auto 22px;max-width:580px;text-align:center;padding:15px 18px;border:2px solid var(--green);border-radius:12px;background:#f0f6f1;box-shadow:0 8px 24px #243b3210;animation:kpiPulse 1.8s ease-in-out infinite}
+.kpi-reminder .kpi-label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#6d8c7d;margin-bottom:3px}
+.kpi-reminder strong{display:block;font:800 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;color:var(--deep)}
+@keyframes kpiPulse{0%,100%{box-shadow:0 0 0 0 #2e79691a;border-color:#2e7969}50%{box-shadow:0 0 0 5px #2e796914;border-color:#79a891}}
+.play-meta{display:flex;justify-content:flex-end;align-items:center;margin:0 0 14px}
+.timer{display:none;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--deep);font-weight:800;font-variant-numeric:tabular-nums;box-shadow:0 3px 12px #243b320c}
+.timer.visible{display:inline-flex}
+.timer.urgent{background:#fff5ed;border-color:#e9b28c;color:#a34b25}
+.brand-choice{
+ display:flex!important;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ min-height:145px;
+}
+.progress{height:7px;background:#e9f0eb;border-radius:99px;overflow:hidden;margin:20px 0 12px}
+.progress span{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.result{background:var(--mint);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,5vw,32px);text-align:center}
+.result h2{font:700 clamp(1.7rem,5vw,2.4rem)/1.15 Manrope,sans-serif;margin:12px 0;color:var(--deep);overflow-wrap:anywhere}
+.champion{font:800 1.2rem Manrope,sans-serif;color:var(--green)}
+label{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],input[type=email]{width:100%;padding:13px;border:1px solid #bdcbbf;border-radius:9px;font:inherit}
+input:focus{outline:3px solid #d4e6d9;border-color:var(--green)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;font-weight:500;line-height:1.5}.consent input{margin-top:5px;flex:0 0 auto}.consent a,.privacy-note a{color:var(--green);text-decoration:underline;text-underline-offset:3px}.privacy-note{margin-top:16px}
+.error{color:#a33b2f;font-size:.9rem;min-height:1.3em}
+.footer{padding:0 clamp(22px,5vw,42px) 24px;color:#75837b;font-size:.72rem}
+
+/* BUSINESS INTELLIGENCE STUDIO SITE HEADER */
+.site-announcement{padding:9px 20px;text-align:center;background:#edf5f0;color:#315f51;font-size:12px;font-weight:600;letter-spacing:.03em}
+.site-announcement-dot{display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:#2e7969}
+.site-header{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:17px clamp(20px,5vw,65px);background:#fff;border-bottom:1px solid #dce7df}
+.site-brand{display:flex;align-items:center;gap:12px;flex-shrink:0;color:#243b32;text-decoration:none}
+.site-brand-mark{display:grid;grid-template-columns:repeat(2,9px);gap:3px;transform:rotate(-8deg)}
+.site-brand-mark span{width:9px;height:9px;border-radius:2px;background:#2e7969}
+.site-brand-mark span:nth-child(2),.site-brand-mark span:nth-child(3){background:#a8c9b5}
+.site-brand-copy strong{display:block;font:800 12px Manrope,sans-serif;letter-spacing:.045em}
+.site-brand-copy small{display:block;margin-top:3px;color:#718078;font-size:9px;letter-spacing:.16em}
+.site-mobile-toggle{display:none;border:1px solid #dce7df;border-radius:8px;background:#fff;color:#315f51;padding:7px 11px;cursor:pointer;font-size:20px}
+.site-main-nav{display:flex;align-items:center;gap:22px}
+.site-nav-group{position:relative}
+.site-nav-trigger,.site-nav-link{border:0;background:none;color:#344b40;text-decoration:none;font:600 13px "DM Sans",sans-serif;cursor:pointer;padding:10px 0}
+.site-nav-trigger:hover,.site-nav-link:hover{color:#2e7969}
+.site-dropdown{display:none;position:absolute;top:100%;left:-15px;min-width:215px;padding:9px;background:#fff;border:1px solid #dce7df;border-radius:10px;box-shadow:0 12px 30px #243b3218}
+.site-nav-group:hover .site-dropdown,.site-nav-group:focus-within .site-dropdown,.site-nav-group.is-open .site-dropdown{display:block}
+.site-dropdown a{display:block;padding:9px 11px;border-radius:6px;color:#344b40;text-decoration:none;font-size:12px}
+.site-dropdown a:hover{background:#edf5f0;color:#2e7969}
+.site-nav-cta{padding:10px 17px;border-radius:8px;background:#315f51;color:#fff!important}
+.site-nav-cta:hover{background:#2e7969}
+@media(max-width:1050px){
+ .site-header{flex-wrap:wrap}
+ .site-mobile-toggle{display:block}
+ .site-main-nav{display:none;width:100%;align-items:stretch;flex-direction:column;gap:5px;padding-top:12px;border-top:1px solid #dce7df}
+ .site-main-nav.is-open{display:flex}
+ .site-nav-trigger,.site-nav-link{display:block;width:100%;text-align:left;padding:9px 4px}
+ .site-dropdown{display:none;position:static;min-width:0;padding:0 0 5px 12px;border:0;border-radius:0;box-shadow:none}
+ .site-nav-group.is-open .site-dropdown{display:block}
+ .site-nav-cta{width:max-content}
+}
+@media(max-width:520px){
+ .site-brand-copy strong{font-size:10px}
+ .site-brand-copy small{font-size:8px}
+ .game{margin:20px auto}
+}
+
+@media(max-width:520px){body{padding:10px}.top{padding:23px 22px}.versus{gap:6px}.versus .choice{padding:12px 7px;min-height:120px;font-size:1rem}.vs{font-size:.65rem}.kpi-reminder{top:4px;padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="site-announcement">
+  <span class="site-announcement-dot" aria-hidden="true"></span>
+  Clearer insight. Better decisions. Stronger customer relationships.
+</div>
+
+<header class="site-header">
+  <a class="site-brand" href="https://ahsan-analyst-hub.github.io/#home" aria-label="Business Intelligence Studio home">
+    <span class="site-brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    <span class="site-brand-copy">
+      <strong>BUSINESS INTELLIGENCE STUDIO</strong>
+      <small>DATA · INSIGHT · GROWTH</small>
+    </span>
+  </a>
+
+  <button class="site-mobile-toggle" id="siteMobileToggle" type="button"
+          aria-label="Open navigation" aria-expanded="false">☰</button>
+
+  <nav class="site-main-nav" id="siteMainNav" aria-label="Main navigation">
+    <div class="site-nav-group">
+      <button class="site-nav-trigger" type="button" aria-expanded="false">Products ▾</button>
+      <div class="site-dropdown">
+        <a href="https://ahsan-analyst-hub.github.io/#retail-analytics">Retail Analytics</a>
+        <a href="https://ahsan-analyst-hub.github.io/#customer-feedback">Customer Feedback Intelligence</a>
+        <a href="https://ahsan-analyst-hub.github.io/#pos-analysis">POS Analysis</a>
+        <a href="https://ahsan-analyst-hub.github.io/#market-research">Market Research</a>
+      </div>
+    </div>
+
+    <div class="site-nav-group">
+      <button class="site-nav-trigger" type="button" aria-expanded="false">Connect ▾</button>
+      <div class="site-dropdown">
+        <a href="https://ahsan-analyst-hub.github.io/#vision">The Vision</a>
+        <a href="https://ahsan-analyst-hub.github.io/#careers">Careers</a>
+        <a href="https://ahsan-analyst-hub.github.io/#contact">Contact us</a>
+      </div>
+    </div>
+
+    <div class="site-nav-group">
+      <button class="site-nav-trigger" type="button" aria-expanded="false">Resources ▾</button>
+      <div class="site-dropdown">
+        <a href="https://ahsan-analyst-hub.github.io/#case-studies">Case Studies</a>
+        <a href="https://ahsan-analyst-hub.github.io/#projects">Projects</a>
+        <a href="https://ahsan-analyst-hub.github.io/#blogs">Blogs</a>
+      </div>
+    </div>
+
+    <a class="site-nav-link" href="https://www.surveymonkey.com/r/2G98V6Y">Survey</a>
+    <a class="site-nav-link site-nav-cta" href="https://ahsan-analyst-hub.github.io/#contact">Let's talk</a>
+  </nav>
+</header>
+
+<main class="game" aria-live="polite">
+<header class="top"><div class="eyebrow">A quick customer choice game</div><h1>High Street Hero</h1><p>Pick the brands you rate most. Your choices help us understand what matters the MOST.</p></header>
+<div class="content">
+<section class="screen active" id="welcome"><p class="question">You ready to play High Street Hero? You have to hit 5 points in a maximum of 25 seconds!</p><div class="actions"><button class="action primary" id="ready">Yes, let's play!</button><button class="action secondary" id="notReady">Not today</button></div><p class="note" id="decline" role="status"></p></section>
+<section class="screen" id="areas"><p class="question">Choose an area to play</p><div class="grid" id="areaChoices"></div><div class="actions"><button class="action secondary" id="backWelcome">Back</button></div></section>
+<section class="screen" id="measures"><p class="question">Which measure would you like to choose?</p><div class="grid" id="measureChoices"></div><div class="actions"><button class="action secondary" id="backAreas">Back</button></div></section>
+<section class="screen" id="play"><div class="play-meta"><div class="timer" id="gameTimer" role="timer" aria-live="off"><span aria-hidden="true">⏱</span><span id="timerValue">25</span><span>seconds</span></div></div><div class="kpi-reminder" aria-live="polite"><span class="kpi-label">You are rating brands on this measure</span><strong id="activeKpi"></strong></div><div class="eyebrow" id="context"></div><p class="question">Which brand do you prefer?</p><div class="versus" id="match"></div><div class="progress" aria-label="Score progress"><span id="bar"></span></div><p class="note" id="scoreNote"></p></section>
+<section class="screen" id="winner"><div class="result"><div class="eyebrow" style="justify-content:center">Your High Street Hero</div><h2 id="winnerName"></h2><p>is your top choice for</p><p class="champion" id="winnerMeasure"></p><p id="winnerSummary"></p></div><p class="question" style="margin-top:24px">Would you like to enter our lucky draw to win a £50 grocery shopping coupon?</p><div class="actions"><button class="action primary" id="enterDraw">Yes, enter me</button><button class="action secondary" id="skipDraw">No thanks</button></div></section>
+<section class="screen" id="entry">
+ <p class="question">Enter the lucky draw</p>
+ <p class="note">Complete the secure entry form below. You must be aged 18 or over. Your game choices will be included automatically.</p>
+ <iframe id="tallyEntryFrame" title="High Street Hero Lucky Draw Entry" loading="lazy" width="100%" height="750" frameborder="0" marginheight="0" marginwidth="0" style="border:0;display:block;width:100%;min-height:650px;border-radius:12px;" ></iframe>
+ <div class="actions"><button class="action secondary" type="button" id="cancelEntry">Back</button></div>
+</section>
+<section class="screen" id="thanks"><div class="result"><h2>Thank you for your feedback!</h2><p id="thanksText">Your choices have been recorded in this game session.</p></div><div class="actions"><button class="action primary" id="restart">Play again</button></div></section>
+</div><footer class="footer">Customer brand comparisons • Lucky draw entries submitted securely through Tally</footer>
+</main>
+<script async src="https://tally.so/widgets/embed.js"></script>
+<script>
+const siteMobileToggle=document.getElementById('siteMobileToggle');
+const siteMainNav=document.getElementById('siteMainNav');
+
+siteMobileToggle.addEventListener('click',()=>{
+  const isOpen=siteMainNav.classList.toggle('is-open');
+  siteMobileToggle.setAttribute('aria-expanded',String(isOpen));
+  siteMobileToggle.setAttribute('aria-label',isOpen?'Close navigation':'Open navigation');
+  siteMobileToggle.textContent=isOpen?'✕':'☰';
+});
+
+document.querySelectorAll('.site-nav-trigger').forEach(trigger=>{
+  trigger.addEventListener('click',()=>{
+    const group=trigger.closest('.site-nav-group');
+    const willOpen=!group.classList.contains('is-open');
+    document.querySelectorAll('.site-nav-group').forEach(item=>{
+      item.classList.remove('is-open');
+      const button=item.querySelector('.site-nav-trigger');
+      if(button)button.setAttribute('aria-expanded','false');
+    });
+    if(willOpen){
+      group.classList.add('is-open');
+      trigger.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+document.querySelectorAll('.site-dropdown a,.site-nav-link').forEach(link=>{
+  link.addEventListener('click',()=>{
+    siteMainNav.classList.remove('is-open');
+    siteMobileToggle.setAttribute('aria-expanded','false');
+    siteMobileToggle.textContent='☰';
+  });
+});
+
+document.addEventListener('click',event=>{
+  if(!event.target.closest('.site-header')){
+    document.querySelectorAll('.site-nav-group').forEach(group=>{
+      group.classList.remove('is-open');
+      const button=group.querySelector('.site-nav-trigger');
+      if(button)button.setAttribute('aria-expanded','false');
+    });
+  }
+});
+
+const brandLists={
+ 'Grocery Stores':['Tesco','Sainsbury’s','Asda','Aldi','Lidl','Morrisons','Co-op','Waitrose','Iceland','Ocado'],
+ 'Clothing Brands':['Next','Marks & Spencer (M&S)','Primark','JD Sports','TK Maxx','H&M','Zara','New Look','Asda (George)','Sports Direct'],
+ 'DIY & Electronics':['B&Q','Screwfix','Currys','Halfords','Wickes','Toolstation','Euro Car Parts','AO.com','Richer Sounds','The Range'],
+ 'Restaurants & Food':['Greggs','McDonald’s','J D Wetherspoon','Nando’s','Subway','Domino’s Pizza','KFC','Wagamama','PizzaExpress','Pizza Hut'],
+ 'Cafes':['Costa Coffee','Greggs','Starbucks','Caffè Nero','Pret A Manger','GAIL’s Artisan Bakery','Black Sheep Coffee','Coffee #1','Blank Street Coffee','Tim Hortons'],
+ 'Department Stores':['John Lewis & Partners','Marks & Spencer (M&S)','IKEA','Selfridges','Harrods','Harvey Nichols','Fortnum & Mason','Liberty London','House of Fraser','Fenwick']
+};
+const measures=['Value for Money & Pricing','Product Quality & Choice','Guarantees & Aftercare','Customer Care & Complaint Resolution','Friendliness & Approachability','Atmosphere & Accessibility','Cleanliness & Store Standards','Service Speed & Convenience','Digital & Omnichannel Experience','Brand Trust & Sustainability'];
+const $=id=>document.getElementById(id);
+let selectedArea='',selectedMeasure='',scores={},askedPairs=new Set(),round=0,champion='';
+let gameStartedAt=null,gameTimerInterval=null,gameFinished=false;
+
+const GAME_DURATION_SECONDS=25;
+
+function show(id){
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    const target = $(id);
+
+    if (!target) {
+        console.error('High Street Hero: screen not found:', id);
+        return;
+    }
+
+    target.classList.add('active');
+}
+function drawChoices(target,items,handler){
+ $(target).innerHTML='';
+ items.forEach(item=>{
+  const b=document.createElement('button');
+  b.className='choice';
+  b.textContent=item;
+  b.addEventListener('click',()=>handler(item));
+  $(target).appendChild(b);
+ });
+}
+function createBrandButton(brand){
+ const b=document.createElement('button');
+ b.className='choice brand-choice';
+ b.type='button';
+ b.textContent=brand;
+ b.addEventListener('click',()=>vote(brand));
+ return b;
+}
+function stopTimer(){
+ if(gameTimerInterval!==null){clearInterval(gameTimerInterval);gameTimerInterval=null;}
+}
+function elapsedSeconds(){
+ return gameStartedAt===null ? 0 : Math.min(GAME_DURATION_SECONDS,Math.max(0,(performance.now()-gameStartedAt)/1000));
+}
+function updateTimer(){
+ if(gameStartedAt===null || gameFinished)return;
+ const remaining=Math.max(0,GAME_DURATION_SECONDS-elapsedSeconds());
+ const shown=Math.ceil(remaining);
+ $('timerValue').textContent=shown;
+ $('gameTimer').classList.toggle('urgent',remaining<=5);
+ if(remaining<=0)finishByTime();
+}
+function startTimer(){
+ stopTimer();
+ gameFinished=false;
+ gameStartedAt=performance.now();
+ $('timerValue').textContent=String(GAME_DURATION_SECONDS);
+ $('gameTimer').classList.add('visible');
+ $('gameTimer').classList.remove('urgent');
+ gameTimerInterval=setInterval(updateTimer,100);
+}
+function finishByTime(){
+ if(gameFinished)return;
+ const highest=Math.max(...Object.values(scores));
+ const leaders=Object.keys(scores).filter(name=>scores[name]===highest);
+ if(leaders.length===1){
+  finish(leaders[0],'time');
+ }else{
+  finish(null,'tie');
+ }
+}
+$('ready').onclick=()=>{drawChoices('areaChoices',Object.keys(brandLists),chooseArea);show('areas');};
+$('notReady').onclick=()=>{
+  window.location.href='https://ahsan-analyst-hub.github.io/#home';
+};
+$('backWelcome').onclick=()=>show('welcome');
+$('backAreas').onclick=()=>show('areas');
+
+function chooseArea(area){
+ selectedArea=area;
+ drawChoices('measureChoices',measures,chooseMeasure);
+ show('measures');
+}
+function chooseMeasure(measure){
+ selectedMeasure=measure;
+ scores={};
+ brandLists[selectedArea].forEach(b=>scores[b]=0);
+ askedPairs=new Set();
+ round=0;
+ champion='';
+ gameStartedAt=null;
+ gameFinished=false;
+ $('activeKpi').textContent=selectedMeasure;
+ $('gameTimer').classList.remove('visible','urgent');
+ nextMatch();
+ show('play');
+ startTimer();
+}
+function nextMatch(){
+ if(gameFinished)return;
+ const brands=brandLists[selectedArea];
+ const active=brands.filter(b=>scores[b]<5);
+ if(active.length<=1){
+  finish(active[0]||Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0],'points');
+  return;
+ }
+ let first,second,pair,tries=0;
+ do{
+  const sorted=active.slice().sort((a,b)=>scores[b]-scores[a]);
+  first=sorted[0];
+  const candidates=active.filter(b=>b!==first);
+  second=candidates[Math.floor(Math.random()*candidates.length)];
+  if(Math.random()<.35){
+   first=active[Math.floor(Math.random()*active.length)];
+   const challengers=active.filter(b=>b!==first);
+   second=challengers[Math.floor(Math.random()*challengers.length)];
+  }
+  pair=[first,second].sort().join('|');
+  tries++;
+ }while(askedPairs.has(pair)&&tries<30);
+ askedPairs.add(pair);
+ round++;
+ $('context').textContent=selectedArea+' • Round '+round;
+ $('match').innerHTML='';
+ [first,second].forEach((brand,i)=>{
+  $('match').appendChild(createBrandButton(brand));
+  if(i===0){
+   const vs=document.createElement('span');
+   vs.className='vs';
+   vs.textContent='OR';
+   $('match').appendChild(vs);
+  }
+ });
+ const leader=Math.max(...Object.values(scores));
+ $('bar').style.width=Math.min(100,leader*20)+'%';
+ $('scoreNote').textContent='Choose one. First brand to 5 points wins. Current leading score: '+leader+'/5.';
+}
+function vote(brand){
+ if(gameFinished)return;
+ scores[brand]++;
+ if(scores[brand]>=5){finish(brand,'points');return;}
+ nextMatch();
+}
+function finish(brand,reason){
+ if(gameFinished)return;
+ gameFinished=true;
+ stopTimer();
+ const elapsed=reason==='time'?GAME_DURATION_SECONDS:elapsedSeconds();
+ const seconds=reason==='time'?GAME_DURATION_SECONDS:Math.max(1,Math.ceil(elapsed));
+ $('gameTimer').classList.remove('visible','urgent');
+ if(reason==='tie'){
+  champion='';
+  const leaders=Object.keys(scores).filter(name=>scores[name]===Math.max(...Object.values(scores)));
+  $('winnerName').textContent='It’s a tie!';
+  $('winnerSummary').textContent='Your comparisons ended after '+GAME_DURATION_SECONDS+' seconds with '+leaders.join(' and ')+' level on '+scores[leaders[0]]+' points. No single most trusted brand emerged.';
+ }else{
+  champion=brand;
+  $('winnerName').textContent=brand;
+  $('winnerSummary').textContent=reason==='points'
+   ? 'Seems like '+brand+' is your most trusted brand in your comparisons. It reached 5 points in '+seconds+' '+(seconds===1?'second':'seconds')+'.'
+   : 'Seems like '+brand+' is your most trusted brand in your comparisons. It reached '+scores[brand]+' '+(scores[brand]===1?'point':'points')+' in '+GAME_DURATION_SECONDS+' seconds.';
+ }
+ $('winnerMeasure').textContent=selectedMeasure;
+ show('winner');
+}
+const TALLY_EMBED_BASE='https://tally.so/embed/4aJ4gk?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
+function loadTallyEntry(){
+ const winnerScore=champion && scores[champion]!==undefined ? scores[champion] : Math.max(0,...Object.values(scores));
+ const params=new URLSearchParams({
+  area:selectedArea,
+  measure:selectedMeasure,
+  winner:champion || 'Tie',
+  winning_score:String(winnerScore),
+  game_duration_seconds:String(Math.max(0,Math.ceil(elapsedSeconds())))
+ });
+ $('tallyEntryFrame').src=TALLY_EMBED_BASE+'&'+params.toString();
+}
+$('enterDraw').onclick=()=>{loadTallyEntry();show('entry');};
+$('skipDraw').onclick=()=>{
+ $('thanksText').textContent='Your feedback has been recorded in this game session. You chose not to enter the draw.';
+ show('thanks');
+};
+$('cancelEntry').onclick=()=>show('winner');
+$('restart').onclick=()=>{
+ stopTimer();
+ gameStartedAt=null;
+ gameFinished=false;
+ $('decline').textContent='';
+ $('ready').disabled=false;
+ $('notReady').textContent='Not today';
+ show('welcome');
+};
+</script></body></html>
