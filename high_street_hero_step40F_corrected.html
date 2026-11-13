@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#315f51">
+<title>High Street Hero | Business Intelligence Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500,600,700&family=Manrope:wght@400;500,600,700,800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#243b32;--green:#2e7969;--deep:#315f51;--mint:#edf5f0;--paper:#f7faf7;--muted:#62736c;--line:#dce7df;--gold:#f2c75c;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:28px 16px;background:linear-gradient(135deg,#f0f6f1,#fbfcfa 70%);font:16px/1.55 "DM Sans",sans-serif;color:var(--ink);display:grid;place-items:center}
+button,input{font:inherit}
+.game{width:min(780px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 65px #243b3212}
+.top{padding:28px clamp(22px,5vw,42px);background:var(--mint);border-bottom:1px solid var(--line)}
+.eyebrow{display:flex;align-items:center;gap:9px;color:#6d8c7d;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.eyebrow:before{content:"";display:inline-block;width:22px;height:2px;background:var(--green)}
+.top h1{font:700 clamp(2rem,6vw,3.4rem)/1.05 Manrope,sans-serif;letter-spacing:-.055em;margin:15px 0 10px;color:var(--ink)}
+.top p{margin:0;color:#62736c;max-width:650px}
+.content{padding:clamp(20px,5vw,40px)}
+.screen{display:none}.screen.active{display:block}
+.question{font:700 clamp(1.2rem,3vw,1.55rem)/1.3 Manrope,sans-serif;margin:0 0 20px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:12px}
+.choice,.action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:15px 17px;font-weight:700;text-align:left;cursor:pointer;color:var(--ink);transition:transform .15s,border-color .15s,background .15s}
+.choice:hover,.action:hover{border-color:var(--green);transform:translateY(-2px);background:#fbfdfb}
+.choice:focus-visible,.action:focus-visible{outline:3px solid #a9cbb9;outline-offset:3px}
+.choice small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.action.primary{background:var(--deep);color:white;border-color:var(--deep);text-align:center}
+.action.primary:hover{background:var(--green)}
+.action.secondary{text-align:center;background:#f4f7f4}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:.9rem;color:var(--muted)}
+.versus{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:14px}
+.versus .choice{text-align:center;min-height:145px;font:700 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;display:grid;place-content:center;overflow-wrap:anywhere}
+.vs{align-self:center;font-weight:800;color:#6d8c7d;font-size:.8rem;letter-spacing:.1em}
+.kpi-reminder{position:sticky;top:10px;z-index:2;margin:0 auto 22px;max-width:580px;text-align:center;padding:15px 18px;border:2px solid var(--green);border-radius:12px;background:#f0f6f1;box-shadow:0 8px 24px #243b3210;animation:kpiPulse 1.8s ease-in-out infinite}
+.kpi-reminder .kpi-label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#6d8c7d;margin-bottom:3px}
+.kpi-reminder strong{display:block;font:800 clamp(1rem,3vw,1.25rem)/1.3 Manrope,sans-serif;color:var(--deep)}
+@keyframes kpiPulse{0%,100%{box-shadow:0 0 0 0 #2e79691a;border-color:#2e7969}50%{box-shadow:0 0 0 5px #2e796914;border-color:#79a891}}
+.play-meta{display:flex;justify-content:flex-end;align-items:center;margin:0 0 14px}
+.timer{display:none;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--deep);font-weight:800;font-variant-numeric:tabular-nums;box-shadow:0 3px 12px #243b320c}
+.timer.visible{display:inline-flex}
+.timer.urgent{background:#fff5ed;border-color:#e9b28c;color:#a34b25}
+.brand-choice{
+ display:flex!important;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ min-height:145px;
+}
+.progress{height:7px;background:#e9f0eb;border-radius:99px;overflow:hidden;margin:20px 0 12px}
+.progress span{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.result{background:var(--mint);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,5vw,32px);text-align:center}
+.result h2{font:700 clamp(1.7rem,5vw,2.4rem)/1.15 Manrope,sans-serif;margin:12px 0;color:var(--deep);overflow-wrap:anywhere}
+.champion{font:800 1.2rem Manrope,sans-serif;color:var(--green)}
+label{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],input[type=email]{width:100%;padding:13px;border:1px solid #bdcbbf;border-radius:9px;font:inherit}
+input:focus{outline:3px solid #d4e6d9;border-color:var(--green)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;font-weight:500;line-height:1.5}.consent input{margin-top:5px;flex:0 0 auto}.consent a,.privacy-note a{color:var(--green);text-decoration:underline;text-underline-offset:3px}.privacy-note{margin-top:16px}
+.error{color:#a33b2f;font-size:.9rem;min-height:1.3em}
+.footer{padding:0 clamp(22px,5vw,42px) 24px;color:#75837b;font-size:.72rem}
+@media(max-width:520px){body{padding:10px}.top{padding:23px 22px}.versus{gap:6px}.versus .choice{padding:12px 7px;min-height:120px;font-size:1rem}.vs{font-size:.65rem}.kpi-reminder{top:4px;padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+ .submit-status{font-size:.9rem;color:var(--deep);min-height:1.4em;margin-top:12px}
+ .action:disabled{opacity:.55;cursor:not-allowed;transform:none}
+ .turnstile-container{margin:18px 0 8px;min-height:65px}
+ .optional-contact{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:14px;background:#fbfdfb}
+ .optional-contact[hidden]{display:none}
+ .consent{cursor:pointer}
+</style>
+</head>
+<body>
+<main class="game" aria-live="polite">
+<header class="top"><div class="eyebrow">A quick customer choice game</div><h1>High Street Hero</h1><p>Pick the brands you rate most. Your choices help us understand what matters the MOST.</p></header>
+<div class="content">
+<section class="screen active" id="welcome"><p class="question">You ready to play High Street Hero? You have to hit 5 points in a maximum of 25 seconds!</p><div class="actions"><button class="action primary" id="ready">Yes, let's play!</button> <button class="action secondary" id="notReady">Not today</button></div><p class="note" id="decline" role="status"></p></section>
+<section class="screen" id="areas"><p class="question">Choose an area to play</p><div class="grid" id="areaChoices"></div><div class="actions"><button class="action secondary" id="backWelcome">Back</button></div></section>
+<section class="screen" id="measures"><p class="question">Which measure would you like to choose?</p><div class="grid" id="measureChoices"></div><div class="actions"><button class="action secondary" id="backAreas">Back</button></div></section>
+<section class="screen" id="play"><div class="play-meta"><div class="timer" id="gameTimer" role="timer" aria-live="off"><span aria-hidden="true">⏱</span><span id="timerValue">25</span><span>seconds</span></div></div><div class="kpi-reminder" aria-live="polite"><span class="kpi-label">You are rating brands on this measure</span><strong id="activeKpi"></strong></div><div class="eyebrow" id="context"></div><p class="question">Which brand do you prefer?</p><div class="versus" id="match"></div><div class="progress" aria-label="Score progress"><span id="bar"></span></div><p class="note" id="scoreNote"></p></section>
+<section class="screen" id="winner"><div class="result"><div class="eyebrow" style="justify-content:center">Your High Street Hero</div><h2 id="winnerName"></h2><p>is your top choice for</p><p class="champion" id="winnerMeasure"></p><p id="winnerSummary"></p></div><p class="question" style="margin-top:24px">Share your choices to help us understand the High Street</p><p class="note">Submitting feedback is free. You can participate without providing your name or email address.</p><div class="actions"><button class="action primary" id="shareFeedback">Continue to feedback</button><button class="action secondary" id="skipFeedback">Finish without submitting</button></div></section>
+<section class="screen" id="entry">
+ <p class="question">Submit your High Street Hero feedback</p>
+ <p class="note">Your brand choices help us understand customer preferences. Email updates are entirely optional, and you can submit feedback without subscribing.</p>
+ <form id="entryForm">
+  <label class="consent"><input id="ageConsent" type="checkbox" required><span>I confirm that I am aged 18 or over.</span></label>
+  <label class="consent"><input id="reportConsent" type="checkbox"><span>Yes, email me the monthly <strong>High Street Hero Brand Performance Report</strong> when available. I can unsubscribe at any time.</span></label>
+  <label class="consent"><input id="marketingConsent" type="checkbox"><span>Yes, send me occasional <strong>Business Intelligence Studio marketing updates</strong> about services, projects and research. I can unsubscribe at any time.</span></label>
+  <div class="optional-contact" id="contactDetails" hidden>
+   <p class="note" style="margin:0">Please provide your contact details only if you selected an email option above.</p>
+   <label for="name">Full name</label>
+   <input id="name" name="name" type="text" autocomplete="name" maxlength="100">
+   <label for="email">Email address</label>
+   <input id="email" name="email" type="email" autocomplete="email" maxlength="254">
+  </div>
+  <label class="consent"><input id="termsConsent" type="checkbox" required><span>I agree to the <a href="high_street_hero_terms.html" target="_blank" rel="noopener">High Street Hero Pilot Terms &amp; Conditions</a> and acknowledge the <a href="high_street_hero_privacy.html" target="_blank" rel="noopener">Privacy Notice</a>.</span></label>
+  <p class="note privacy-note">We record your game results for pilot analysis. We only store your name and email when you choose at least one email option. Reports reflect participating players' opinions, not independent brand assessments.</p>
+  <div class="turnstile-container" id="turnstileContainer" aria-label="Security verification"></div>
+  <p class="error" id="entryError" role="alert"></p>
+  <p class="submit-status" id="submitStatus" role="status"></p>
+  <div class="actions"><button class="action primary" type="submit" id="submitEntry">Submit feedback</button><button class="action secondary" type="button" id="cancelEntry">Back</button></div>
+ </form>
+</section>
+<section class="screen" id="thanks"><div class="result"><h2>Thank you for your feedback!</h2><p id="thanksText">Thank you for taking part.</p></div><div class="actions"><button class="action primary" id="restart">Play again</button></div></section>
+</div><footer class="footer">Customer brand comparisons • Pilot testing only • <a href="high_street_hero_privacy.html">Privacy Notice</a> • <a href="high_street_hero_terms.html">Pilot Terms</a></footer>
+</main>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+const HSH_API_URL = "https://high-street-hero-api.ahsan-haq-connect.workers.dev/submit";
+const HSH_TURNSTILE_SITE_KEY = "0x4AAAAAAF-pqOv-x17e-zhE";
+let turnstileWidgetId = null;
+let entrySubmitting = false;
+let finishedSeconds = 0;
+let resultType = "winner";
+
+function ensureTurnstile(attempts = 0) {
+  const container = document.getElementById("turnstileContainer");
+  if (!container || turnstileWidgetId !== null) return;
+  if (!window.turnstile) {
+    container.textContent = "Loading security verification…";
+    if (attempts < 30) {
+      setTimeout(() => ensureTurnstile(attempts + 1), 500);
+    } else {
+      container.textContent = "Security verification could not load. Check your connection or content blocker, then refresh.";
+    }
+    return;
+  }
+  container.textContent = "";
+  try {
+    turnstileWidgetId = window.turnstile.render(container, {
+      sitekey: HSH_TURNSTILE_SITE_KEY,
+      theme: "light",
+      callback: () => { document.getElementById("entryError").textContent = ""; },
+      "error-callback": () => { document.getElementById("entryError").textContent = "Security verification failed. Please retry."; }
+    });
+  } catch (error) {
+    console.error("Turnstile render failed:", error);
+    container.textContent = "Security verification could not be displayed. Please refresh the page.";
+  }
+}
+
+const brandLists={
+ 'Grocery Stores':['Tesco','Sainsbury’s','Asda','Aldi','Lidl','Morrisons','Co-op','Waitrose','Iceland','Ocado'],
+ 'Clothing Brands':['Next','Marks & Spencer (M&S)','Primark','JD Sports','TK Maxx','H&M','Zara','New Look','Asda (George)','Sports Direct'],
+ 'DIY & Electronics':['B&Q','Screwfix','Currys','Halfords','Wickes','Toolstation','Euro Car Parts','AO.com','Richer Sounds','The Range'],
+ 'Restaurants & Food':['Greggs','McDonald’s','J D Wetherspoon','Nando’s','Subway','Domino’s Pizza','KFC','Wagamama','PizzaExpress','Pizza Hut'],
+ 'Cafes':['Costa Coffee','Greggs','Starbucks','Caffè Nero','Pret A Manger','GAIL’s Artisan Bakery','Black Sheep Coffee','Coffee #1','Blank Street Coffee','Tim Hortons'],
+ 'Department Stores':['John Lewis & Partners','Marks & Spencer (M&S)','IKEA','Selfridges','Harrods','Harvey Nichols','Fortnum & Mason','Liberty London','House of Fraser','Fenwick']
+};
+const measures=['Value for Money & Pricing','Product Quality & Choice','Guarantees & Aftercare','Customer Care & Complaint Resolution','Friendliness & Approachability','Atmosphere & Accessibility','Cleanliness & Store Standards','Service Speed & Convenience','Digital & Omnichannel Experience','Brand Trust & Sustainability'];
+const $=id=>document.getElementById(id);
+let selectedArea='',selectedMeasure='',scores={},askedPairs=new Set(),round=0,champion='';
+let gameStartedAt=null,gameTimerInterval=null,gameFinished=false;
+
+const GAME_DURATION_SECONDS=25;
+
+function show(id){
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    const target = $(id);
+
+    if (!target) {
+        console.error('High Street Hero: screen not found:', id);
+        return;
+    }
+
+    target.classList.add('active');
+}
+function drawChoices(target,items,handler){
+ $(target).innerHTML='';
+ items.forEach(item=>{
+  const b=document.createElement('button');
+  b.className='choice';
+  b.textContent=item;
+  b.addEventListener('click',()=>handler(item));
+  $(target).appendChild(b);
+ });
+}
+function createBrandButton(brand){
+ const b=document.createElement('button');
+ b.className='choice brand-choice';
+ b.type='button';
+ b.textContent=brand;
+ b.addEventListener('click',()=>vote(brand));
+ return b;
+}
+function stopTimer(){
+ if(gameTimerInterval!==null){clearInterval(gameTimerInterval);gameTimerInterval=null;}
+}
+function elapsedSeconds(){
+ return gameStartedAt===null ? 0 : Math.min(GAME_DURATION_SECONDS,Math.max(0,(performance.now()-gameStartedAt)/1000));
+}
+function updateTimer(){
+ if(gameStartedAt===null || gameFinished)return;
+ const remaining=Math.max(0,GAME_DURATION_SECONDS-elapsedSeconds());
+ const shown=Math.ceil(remaining);
+ $('timerValue').textContent=shown;
+ $('gameTimer').classList.toggle('urgent',remaining<=5);
+ if(remaining<=0)finishByTime();
+}
+function startTimer(){
+ stopTimer();
+ gameFinished=false;
+ gameStartedAt=performance.now();
+ $('timerValue').textContent=String(GAME_DURATION_SECONDS);
+ $('gameTimer').classList.add('visible');
+ $('gameTimer').classList.remove('urgent');
+ gameTimerInterval=setInterval(updateTimer,100);
+}
+function finishByTime(){
+ if(gameFinished)return;
+ const highest=Math.max(...Object.values(scores));
+ const leaders=Object.keys(scores).filter(name=>scores[name]===highest);
+ if(leaders.length===1){
+  finish(leaders[0],'time');
+ }else{
+  finish(null,'tie');
+ }
+}
+$('ready').onclick=()=>{drawChoices('areaChoices',Object.keys(brandLists),chooseArea);show('areas');};
+$('notReady').onclick=()=>{
+ $('decline').textContent='You’re missing out on something BIG!';
+ $('ready').disabled=true;
+ $('notReady').textContent='Close game';
+ $('notReady').onclick=()=>{document.querySelector('.game').innerHTML='<div class="content"><h2>Thanks for stopping by!</h2><a class="back-link" href="https://ahsan-analyst-hub.github.io/#home">Back to Business Intelligence Studio</a></div>';};
+};
+$('backWelcome').onclick=()=>show('welcome');
+$('backAreas').onclick=()=>show('areas');
+
+function chooseArea(area){
+ selectedArea=area;
+ drawChoices('measureChoices',measures,chooseMeasure);
+ show('measures');
+}
+function chooseMeasure(measure){
+ selectedMeasure=measure;
+ scores={};
+ brandLists[selectedArea].forEach(b=>scores[b]=0);
+ askedPairs=new Set();
+ round=0;
+ champion='';
+ gameStartedAt=null;
+ gameFinished=false;
+ $('activeKpi').textContent=selectedMeasure;
+ $('gameTimer').classList.remove('visible','urgent');
+ nextMatch();
+ show('play');
+ startTimer();
+}
+function nextMatch(){
+ if(gameFinished)return;
+ const brands=brandLists[selectedArea];
+ const active=brands.filter(b=>scores[b]<5);
+ if(active.length<=1){
+  finish(active[0]||Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0],'points');
+  return;
+ }
+ let first,second,pair,tries=0;
+ do{
+  const sorted=active.slice().sort((a,b)=>scores[b]-scores[a]);
+  first=sorted[0];
+  const candidates=active.filter(b=>b!==first);
+  second=candidates[Math.floor(Math.random()*candidates.length)];
+  if(Math.random()<.35){
+   first=active[Math.floor(Math.random()*active.length)];
+   const challengers=active.filter(b=>b!==first);
+   second=challengers[Math.floor(Math.random()*challengers.length)];
+  }
+  pair=[first,second].sort().join('|');
+  tries++;
+ }while(askedPairs.has(pair)&&tries<30);
+ askedPairs.add(pair);
+ round++;
+ $('context').textContent=selectedArea+' • Round '+round;
+ $('match').innerHTML='';
+ [first,second].forEach((brand,i)=>{
+  $('match').appendChild(createBrandButton(brand));
+  if(i===0){
+   const vs=document.createElement('span');
+   vs.className='vs';
+   vs.textContent='OR';
+   $('match').appendChild(vs);
+  }
+ });
+ const leader=Math.max(...Object.values(scores));
+ $('bar').style.width=Math.min(100,leader*20)+'%';
+ $('scoreNote').textContent='Choose one. First brand to 5 points wins. Current leading score: '+leader+'/5.';
+}
+function vote(brand){
+ if(gameFinished)return;
+ scores[brand]++;
+ if(scores[brand]>=5){finish(brand,'points');return;}
+ nextMatch();
+}
+function finish(brand,reason){
+ if(gameFinished)return;
+ gameFinished=true;
+ stopTimer();
+ const elapsed=reason==='time'?GAME_DURATION_SECONDS:elapsedSeconds();
+ const seconds=reason==='time'?GAME_DURATION_SECONDS:Math.max(1,Math.ceil(elapsed));
+ finishedSeconds=seconds;
+ resultType=reason==='tie'?'tie':'winner';
+ $('gameTimer').classList.remove('visible','urgent');
+ if(reason==='tie'){
+  champion='';
+  const leaders=Object.keys(scores).filter(name=>scores[name]===Math.max(...Object.values(scores)));
+  $('winnerName').textContent='It’s a tie!';
+  $('winnerSummary').textContent='Your comparisons ended after '+GAME_DURATION_SECONDS+' seconds with '+leaders.join(' and ')+' level on '+scores[leaders[0]]+' points. No single most trusted brand emerged.';
+ }else{
+  champion=brand;
+  $('winnerName').textContent=brand;
+  $('winnerSummary').textContent=reason==='points'
+   ? 'Seems like '+brand+' is your most trusted brand in your comparisons. It reached 5 points in '+seconds+' '+(seconds===1?'second':'seconds')+'.'
+   : 'Seems like '+brand+' is your most trusted brand in your comparisons. It reached '+scores[brand]+' '+(scores[brand]===1?'point':'points')+' in '+GAME_DURATION_SECONDS+' seconds.';
+ }
+ $('winnerMeasure').textContent=selectedMeasure;
+ show('winner');
+}
+$('shareFeedback').onclick=()=>{show('entry');ensureTurnstile();};
+$('skipFeedback').onclick=()=>{
+ $('thanksText').textContent='Your choices stayed in this game session and were not submitted to our database.';
+ show('thanks');
+};
+$('cancelEntry').onclick=()=>show('winner');
+function updateContactDetails(){
+ const wantsEmail=$('reportConsent').checked || $('marketingConsent').checked;
+ $('contactDetails').hidden=!wantsEmail;
+ $('name').required=wantsEmail;
+ $('email').required=wantsEmail;
+ if(!wantsEmail){$('name').value='';$('email').value='';}
+}
+$('reportConsent').addEventListener('change',updateContactDetails);
+$('marketingConsent').addEventListener('change',updateContactDetails);
+$('entryForm').onsubmit=async e=>{
+ e.preventDefault();
+ if(entrySubmitting)return;
+ const requiredChecks=['ageConsent','termsConsent'];
+ if(requiredChecks.some(id=>!$(id).checked)){
+  $('entryError').textContent='Please confirm you are 18 or over and accept the Pilot Terms to continue.';
+  return;
+ }
+ if(!window.turnstile || turnstileWidgetId===null){
+  $('entryError').textContent='Security verification is not ready. Please wait and try again.';
+  return;
+ }
+ const token=window.turnstile.getResponse(turnstileWidgetId);
+ if(!token){
+  $('entryError').textContent='Please complete the security verification first.';
+  return;
+ }
+ const wantsEmail=$('reportConsent').checked || $('marketingConsent').checked;
+ const name=wantsEmail ? $('name').value.trim() : '';
+ const payload={
+  turnstile_token:token,
+  game_category:selectedArea,
+  measure:selectedMeasure,
+  winner_brand:champion,
+  winner_score:champion ? scores[champion] : Math.max(...Object.values(scores)),
+  game_duration_seconds:finishedSeconds,
+  result_type:resultType,
+  scores:{...scores},
+  customer_name:name,
+  email_address:wantsEmail ? $('email').value.trim() : '',
+  age_18_confirmed:$('ageConsent').checked,
+  report_consent:$('reportConsent').checked,
+  terms_accepted:$('termsConsent').checked,
+  marketing_consent:$('marketingConsent').checked
+ };
+ entrySubmitting=true;
+ $('submitEntry').disabled=true;
+ $('submitEntry').textContent='Submitting...';
+ $('entryError').textContent='';
+ $('submitStatus').textContent='Sending your feedback securely...';
+ try{
+  const response=await fetch(HSH_API_URL,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify(payload)
+  });
+  const data=await response.json();
+  if(!response.ok || data.success!==true || !data.submission_id){
+   throw new Error(data.message || 'The server could not save your feedback.');
+  }
+  $('thanksText').textContent=(name ? 'Thank you, '+name+'. ' : 'Thank you! ')+ 'Your feedback was saved. Reference: '+data.submission_id;
+  $('entryForm').reset();
+  $('submitStatus').textContent='';
+  show('thanks');
+ }catch(error){
+  $('entryError').textContent=error.message || 'Could not submit. Please try again.';
+  $('submitStatus').textContent='';
+  if(window.turnstile && turnstileWidgetId!==null)window.turnstile.reset(turnstileWidgetId);
+ }finally{
+  entrySubmitting=false;
+  $('submitEntry').disabled=false;
+  $('submitEntry').textContent='Submit feedback';
+ }
+};
+$('restart').onclick=()=>{
+ stopTimer();
+ gameStartedAt=null;
+ gameFinished=false;
+ finishedSeconds=0;
+ resultType='winner';
+ $('decline').textContent='';
+ $('ready').disabled=false;
+ $('notReady').textContent='Not today';
+ $('notReady').onclick=null;
+ show('welcome');
+};
+</script></body></html>
