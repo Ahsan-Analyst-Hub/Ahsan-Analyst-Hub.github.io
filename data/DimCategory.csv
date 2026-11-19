@@ -1,0 +1,10 @@
+CategoryID,CategoryName,imageURL,Status
+C001,Grocery,images/categories/hsh_grocery.png,1
+C002,Clothing Brands,images/categories/hsh_clothing_brands.png,1
+C003,DIY & Electronics,images/categories/hsh_diy_electronics.png,1
+C004,Restaurants & Food,images/categories/hsh_restaurants_food.png,1
+C005,Cafes,images/categories/hsh_cafes.png,1
+C006,Department Stores,images/categories/hsh_department_stores.png,1
+C007,Global Cars,images/categories/hsh_global_cars.png,1
+C008,Luxury Cars,images/categories/hsh_luxury_cars.png,1
+C009,Sports Cars,images/categories/hsh_sports_cars.png,1

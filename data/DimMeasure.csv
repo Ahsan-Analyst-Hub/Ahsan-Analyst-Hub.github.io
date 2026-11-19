@@ -1,0 +1,10 @@
+MeasureID,MeasureName,imageURL,Status
+M001,Friendliness,images/measures/hsh_measure_friendliness.png,1
+M002,Product Quality,images/measures/hsh_measure_product_quality.png,1
+M003,Customer Care,images/measures/hsh_measure_customer_care.png,1
+M004,Value for Money,images/measures/hsh_measure_value_for_money.png,1
+M005,Product Range,images/measures/hsh_measure_product_range.png,1
+M006,Availability,images/measures/hsh_measure_availability.png,1
+M007,Cleanliness,images/measures/hsh_measure_cleanliness.png,1
+M008,Service Speed,images/measures/hsh_measure_service_speed.png,1
+M009,Brand Trust,images/measures/hsh_measure_brand_trust.png,1
